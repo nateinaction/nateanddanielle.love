@@ -5,15 +5,20 @@ import media from './media'
 
 /*
 posts: {
-  fetching: false,
-	post: {
-    type: image,
-		img: {
-      src: image.png,
-      fetching: false
-    },
-		title: Post Title,
-		contents: '<tag>html</tag>'
+	fetching: false,
+	posts: [
+		{post1_obj},
+		{post2_obj}
+	]
+},
+media: {
+	ID1: {
+		fetching: false,
+		media: {media_obj}
+	},
+	ID2: {
+		fetching: false,
+		media: {media_obj}
 	}
 }
 */

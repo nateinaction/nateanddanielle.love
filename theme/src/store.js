@@ -25,3 +25,4 @@ store.subscribe(() => console.log(store.getState()))
 
 
 store.dispatch(fetchPosts())
+store.dispatch(fetchPosts(2))

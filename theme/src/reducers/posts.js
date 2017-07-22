@@ -1,19 +1,4 @@
-/*
-const helper = (state, action) => {
-	const message = action.message || ''
-	const posts = action.posts || []
-	const fetching = (posts.length === 0 && message.length === 0)
-	return Object.assign({}, state, {
-		[action.subreddit]: {
-			fetching,
-			posts,
-			message
-		}
-	})
-}
-*/
-
-const posts = (state = {fetching: false}, action) => {
+const posts = (state = {fetching: false, posts: []}, action) => {
 	switch (action.type) {
 		case 'FETCHING_POSTS':
       return Object.assign({}, state, {
@@ -22,7 +7,7 @@ const posts = (state = {fetching: false}, action) => {
 		case 'SET_POSTS':
       return Object.assign({}, state, {
         fetching: false,
-        posts: action.posts
+        posts: state.posts.concat(action.posts)
       })
 		default:
 			return state
