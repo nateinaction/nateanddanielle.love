@@ -1,6 +1,8 @@
-const setPosts = (posts) => ({
+const setPosts = (timeDirection, posts, date) => ({
 	type: 'SET_POSTS',
-  posts
+	timeDirection,
+  posts,
+	date
 })
 
 export default setPosts;

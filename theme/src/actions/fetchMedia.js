@@ -15,8 +15,7 @@ const fetchMedia = (mediaArray) => (
     }
     return axios(url, config)
 			.then(res => (
-        //console.log(res.data)
-				dispatch(setMedia(mediaArray, res.data))
+				dispatch(setMedia(res.data))
 			))
 		  .catch(err => {
 				if (err) console.log(err)

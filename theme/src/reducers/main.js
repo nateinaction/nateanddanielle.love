@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import posts from './posts'
 import media from './media'
+import timeline from './timeline'
 
 /*
 posts: {
@@ -25,7 +26,8 @@ media: {
 
 const reducers = combineReducers({
 	posts,
-  media
+  media,
+	timeline
 })
 
 export default reducers

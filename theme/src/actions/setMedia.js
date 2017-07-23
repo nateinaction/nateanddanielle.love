@@ -1,6 +1,5 @@
-const setMedia = (keys, media) => ({
+const setMedia = (media) => ({
 	type: 'SET_MEDIA',
-  keys,
 	media
 })
 
