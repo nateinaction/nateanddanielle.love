@@ -18,6 +18,12 @@ const fetchTimeline = (order = 'desc') => (
       .then(res => {
         if (order === 'desc') {
           dispatch(fetchTimeline('asc'))
+          return dispatch(setTimeline({
+            latest: {
+              fetching: false,
+              date: res.data[0].date
+            }
+          }))
         }
         return dispatch(setTimeline({
           earliest: {

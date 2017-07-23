@@ -28,12 +28,12 @@ const timeline = (state = defaultTimeline, action) => {
       })
     case 'FETCHING_POSTS':
       return Object.assign(state, {
-        latestLoaded: {
+        latestLoaded: Object.assign(state.latestLoaded, {
           fetching: true
-        },
-        earliestLoaded: {
+        }),
+        earliestLoaded: Object.assign(state.latestLoaded, {
           fetching: true
-        }
+        })
       })
     case 'SET_POSTS':
       return Object.assign(state, {

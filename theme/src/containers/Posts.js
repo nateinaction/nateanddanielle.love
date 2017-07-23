@@ -16,6 +16,10 @@ class Posts extends Component {
   render() {
     return (
       <Grid container gutter={24} className={'posts'}>
+        <LoadMore
+          timeDirection={'after'}
+          timeline={this.props.timeline}
+          fetchPosts={this.props.fetchPosts} />
         {this.props.posts.posts.map((post, index) => (
           <Post
             key={index}
@@ -23,6 +27,7 @@ class Posts extends Component {
             media={this.props.media[post.featured_media]} />
         ))}
         <LoadMore
+          timeDirection={'before'}
           timeline={this.props.timeline}
           fetchPosts={this.props.fetchPosts} />
       </Grid>
