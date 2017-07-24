@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button';
-//import '../styles/components/LoadMore.css'
+import '../styles/components/LoadMore.css'
 
 const LoadMore = (props) => {
   let config = {
@@ -17,7 +17,7 @@ const LoadMore = (props) => {
     config.message = 'The beginning...'
   }
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} className={'load-more'}>
       <Button
         raised
         color="primary"

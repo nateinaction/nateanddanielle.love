@@ -10,7 +10,8 @@ const fetchMedia = (mediaArray) => (
     const url = `https://nateanddanielle.love/wp-json/wp/v2/media`
     const config = {
       params: {
-        include: mediaArray.join()
+        include: mediaArray.join(),
+        context: embed
       }
     }
     return axios(url, config)
