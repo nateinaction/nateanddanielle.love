@@ -1,3 +1,5 @@
+/* @flow */
+
 const fetchMediaHelper = (state, action) => {
 	let response = Object.assign({}, state)
 	action.keys.forEach((key) => {

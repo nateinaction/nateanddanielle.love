@@ -6,7 +6,7 @@ function lexi_enqueue_style() {
 }
 
 function lexi_enqueue_script() {
-	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false );
+	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, false, true );
 }
 
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_style' );
