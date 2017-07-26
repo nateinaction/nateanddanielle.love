@@ -11,3 +11,8 @@ function lexi_enqueue_script() {
 
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_style' );
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_script' );
+
+function viewport_meta() {
+  echo '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
+}
+add_action('wp_head', 'viewport_meta');
