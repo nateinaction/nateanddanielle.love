@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Grid from 'material-ui/Grid'
+import { CircularProgress } from 'material-ui/Progress'
 import fetchTimeline from '../actions/fetchTimeline'
 import fetchPosts from '../actions/fetchPosts'
 import Post from '../components/Post'
@@ -14,6 +15,13 @@ class Posts extends Component {
   }
 
   render() {
+    if (this.props.posts.posts.length === 0) {
+      return (
+        <Grid container gutter={24} className={'loading'}>
+          <CircularProgress size={150} className={'progress'} />
+        </Grid>
+      );
+    }
     return (
       <Grid container gutter={24} className={'posts'}>
         <LoadMore
