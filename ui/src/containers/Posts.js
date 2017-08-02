@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Grid from 'material-ui/Grid'
 import { CircularProgress } from 'material-ui/Progress'
+import Lightbox from 'react-images'
+
 import fetchTimeline from '../actions/fetchTimeline'
 import fetchPosts from '../actions/fetchPosts'
+import openLightbox from '../actions/openLightbox'
+import closeLightbox from '../actions/closeLightbox'
+
 import Post from '../components/Post'
 import LoadMore from '../components/LoadMore'
 import '../styles/containers/Posts.css'
@@ -32,26 +37,38 @@ class Posts extends Component {
           <Post
             key={index}
             post={post}
-            media={this.props.media[post.featured_media]} />
+            media={this.props.media[post.featured_media]}
+            tags={this.props.tags}
+            openLightbox={this.props.openLightbox} />
         ))}
         <LoadMore
           timeDirection={'before'}
           timeline={this.props.timeline}
           fetchPosts={this.props.fetchPosts} />
+        <Lightbox
+          images={this.props.lightbox.images}
+          isOpen={this.props.lightbox.isOpen}
+          onClose={() => this.props.closeLightbox()}
+          backdropClosesModal={true}
+          showImageCount={false} />
       </Grid>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => ({
   timeline: state.timeline,
   posts: state.posts,
-  media: state.media
+  media: state.media,
+  tags: state.tags,
+  lightbox: state.lightbox
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetchTimeline: () => dispatch(fetchTimeline()),
-  fetchPosts: (timeDirection, date) => dispatch(fetchPosts(timeDirection, date))
+  fetchPosts: (timeDirection, date) => dispatch(fetchPosts(timeDirection, date)),
+  openLightbox: (imagesArray) => dispatch(openLightbox(imagesArray)),
+  closeLightbox: () => dispatch(closeLightbox())
 })
 
 const PostsContainer = connect(

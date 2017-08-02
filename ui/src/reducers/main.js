@@ -4,7 +4,9 @@ import { combineReducers } from 'redux'
 
 import posts from './posts'
 import media from './media'
+import tags from './tags'
 import timeline from './timeline'
+import lightbox from './lightbox'
 
 /*
 posts: {
@@ -29,7 +31,9 @@ media: {
 const reducers = combineReducers({
 	posts,
   media,
-	timeline
+	tags,
+	timeline,
+	lightbox
 })
 
 export default reducers

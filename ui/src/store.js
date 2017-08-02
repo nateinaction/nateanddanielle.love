@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 
 import reducers from './reducers/main'
 
-//import fetchPosts from './actions/fetchPosts'
+//import fetchTags from './actions/fetchTags'
 
 /*
  * Redux Store
@@ -29,4 +29,4 @@ store.subscribe(() => console.log(store.getState()))
 store.dispatch(fetchPosts())
 store.dispatch(fetchPosts(2))
 */
-//store.dispatch(fetchPosts('before', '2016-06-12T08:10:12Z'))
+//store.dispatch(fetchTags([12,17]))

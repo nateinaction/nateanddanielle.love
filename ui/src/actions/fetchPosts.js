@@ -3,6 +3,7 @@ import axios from 'axios';
 import setFetching from './setFetching'
 import setPosts from './setPosts'
 import fetchMedia from './fetchMedia'
+import fetchTags from './fetchTags'
 
 const fetchPosts = (timeDirection = 'before', date = new Date().toISOString()) => (
   (dispatch, getState) => {
@@ -16,10 +17,22 @@ const fetchPosts = (timeDirection = 'before', date = new Date().toISOString()) =
     }
     return axios(url, config)
 			.then(res => {
-        let mediaArray = res.data.map((post) => (
-          post.featured_media
-        ))
-        dispatch(fetchMedia(mediaArray))
+
+        let content = {
+          media: [],
+          tags: []
+        }
+        res.data.forEach(post => {
+          content.media.push(post.featured_media)
+
+          // filter out duplicates
+          content.tags = content.tags.concat(post.tags.filter(tag => {
+            return (content.tags.indexOf(tag) === -1)
+          }))
+        })
+
+        dispatch(fetchTags(content.tags))
+        dispatch(fetchMedia(content.media))
 
         let timeline = {}
         if ( timeDirection === 'before' ) {

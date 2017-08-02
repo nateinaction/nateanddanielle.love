@@ -1,0 +1,9 @@
+tags: {
+  display: 'flex';
+  justifyContent: 'center';
+  flexWrap: 'wrap';
+}
+
+tag: {
+  margin: 0.2rem;
+}

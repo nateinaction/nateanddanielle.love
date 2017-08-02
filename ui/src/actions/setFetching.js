@@ -12,6 +12,11 @@ const setFetching = (item_type, item_info) => {
     return {
     	type: 'FETCHING_TIMELINE',
     }
+  } else if (item_type === 'tags') {
+    return {
+    	type: 'FETCHING_TAGS',
+      keys: item_info
+    }
   }
 }
 
