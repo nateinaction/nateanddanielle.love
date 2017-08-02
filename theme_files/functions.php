@@ -2,11 +2,11 @@
 
 function lexi_enqueue_style() {
   wp_enqueue_style( 'lexi_font', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500', false );
-	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . '/style.css', false );
+	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . '/style.css', false, '0.3.0' );
 }
 
 function lexi_enqueue_script() {
-	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, false, true );
+	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, '0.3.0', true );
 }
 
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_style' );
