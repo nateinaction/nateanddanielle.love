@@ -4,10 +4,10 @@ import setFetching from './setFetching'
 import setMedia from './setMedia'
 
 const fetchMedia = (mediaArray) => (
-  (dispatch) => {
+  (dispatch, getState) => {
     dispatch(setFetching('media', mediaArray))
 
-    const url = `https://nateanddanielle.love/wp-json/wp/v2/media`
+    const url = `${getState().fromLocal.endpoint}/wp/v2/media`
     const config = {
       params: {
         include: mediaArray.join()

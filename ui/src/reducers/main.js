@@ -7,6 +7,7 @@ import media from './media'
 import tags from './tags'
 import timeline from './timeline'
 import lightbox from './lightbox'
+import fromLocal from './fromLocal'
 
 /*
 posts: {
@@ -33,7 +34,8 @@ const reducers = combineReducers({
   media,
 	tags,
 	timeline,
-	lightbox
+	lightbox,
+	fromLocal
 })
 
 export default reducers

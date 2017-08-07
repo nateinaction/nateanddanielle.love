@@ -9,7 +9,7 @@ const fetchPosts = (timeDirection = 'before', date = new Date().toISOString()) =
   (dispatch, getState) => {
     dispatch(setFetching('posts'))
 
-    const url = `https://nateanddanielle.love/wp-json/wp/v2/posts`
+    const url = `${getState().fromLocal.endpoint}/wp/v2/posts`
     const config = {
       params: {
         [timeDirection]: date
