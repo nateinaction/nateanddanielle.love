@@ -7,7 +7,7 @@ const fetchMedia = (mediaArray) => (
   (dispatch, getState) => {
     dispatch(setFetching('media', mediaArray))
 
-    const url = `${getState().fromLocal.endpoint}/wp/v2/media`
+    const url = `${getState().fromLocal.endpoint}wp/v2/media`
     const config = {
       params: {
         include: mediaArray.join()

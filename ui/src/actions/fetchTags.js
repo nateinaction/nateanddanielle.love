@@ -14,7 +14,7 @@ const fetchTags = (tagArray) => (
     ))
 
     if (tagsToGet.length !== 0) {
-      const url = `${getState().fromLocal.endpoint}/wp/v2/tags`
+      const url = `${getState().fromLocal.endpoint}wp/v2/tags`
       const config = {
         params: {
           include: tagsToGet.join()

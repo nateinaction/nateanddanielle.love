@@ -7,7 +7,7 @@ const fetchTimeline = (order = 'desc') => (
   (dispatch, getState) => {
     dispatch(setFetching('timeline'))
 
-    const url = `${getState().fromLocal.endpoint}/wp/v2/posts`
+    const url = `${getState().fromLocal.endpoint}wp/v2/posts`
     const config = {
       params: {
         per_page: '1',
