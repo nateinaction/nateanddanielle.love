@@ -13,7 +13,7 @@ const srcSize = (media, width) => {
   let response = {
     featuredSize: availableSizes.find(size => {
       return width <= size;
-    }),
+    }) || 'full',
     src: media.sizes['full'].source_url,
     srcset
   }
