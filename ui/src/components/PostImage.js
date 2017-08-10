@@ -3,36 +3,60 @@ import { LinearProgress } from 'material-ui/Progress';
 import { CardMedia } from 'material-ui/Card';
 import '../styles/components/PostImage.css'
 
-const srcSize = (media, width) => {
-  let availableSizes = [200,400,600,800,1200].filter(size => {
-    return (typeof media.sizes[size] !== 'undefined')
-  })
-  let srcset = availableSizes.map(size => {
-    return media.sizes[size].source_url + ' ' + size + 'w'
-  })
+const srcSize = (imageType, maxWidth, imageDetails) => {
+  // Apparently GIFs are no longer animated after WP scales them so we always serve full size
   let response = {
-    featuredSize: availableSizes.find(size => {
-      return width <= size;
-    }) || 'full',
-    src: media.sizes['full'].source_url,
-    srcset
+    featured: imageDetails.sizes['full'].source_url,
+    src: imageDetails.sizes['full'].source_url,
   }
+
+  if (imageType !== "image/gif") {
+    // find available sizes for a given image
+    let availableSizes = [200,400,600,800,1200].filter(size => {
+      return (typeof imageDetails.sizes[size] !== 'undefined')
+    })
+
+    // grab the size of the featured image and deliver other sizes to srcset
+    let featuredSize = availableSizes.find(size => {
+      return maxWidth <= size;
+    }) || 'full'
+    let srcset = availableSizes.map(size => {
+      return imageDetails.sizes[size].source_url + ' ' + size + 'w'
+    })
+
+    // create response
+    response = {
+      featured: imageDetails.sizes[featuredSize].source_url,
+      src: imageDetails.sizes['full'].source_url,
+      srcset
+    }
+  }
+
   return response
 }
 
 const PostImage = (props) => {
+  // if fetching show loading bar
   if (props.fetching) {
     return (
       <LinearProgress className={'fetching'} />
     )
   }
+
+  // else get image object and return
+  let media = {
+    type: props.media.mime_type,
+    maxWidth: props.width,
+    details: props.media.media_details,
+  }
+  let image = srcSize(media.type, media.maxWidth, media.details)
   return (
     <CardMedia>
       <img
         className='post-image'
-        src={props.media.media_details.sizes[srcSize(props.media.media_details, props.width).featuredSize].source_url}
+        src={image.featured}
         alt={props.media.alt_text}
-        onClick={() => props.openLightbox([srcSize(props.media.media_details, props.width)])} />
+        onClick={() => props.openLightbox([image])} />
     </CardMedia>
   )
 }
