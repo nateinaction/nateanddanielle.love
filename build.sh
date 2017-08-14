@@ -24,6 +24,12 @@ cp $(find ./ui/build/static/js/ -name '*.js') ./build/lexi-theme/ui.js
 echo 'Contcatenating style.css'
 cat $(find ./ui/build/static/css/ -name '*.css') >> ./build/lexi-theme/style.css
 
+# adding ACF to build
+wget -O ./acf.zip "https://downloads.wordpress.org/plugin/advanced-custom-fields.latest-stable.zip"
+unzip ./acf.zip
+rm ./acf.zip
+mv ./advanced-custom-fields ./acf
+
 # create plugin zip
 echo 'Creating plugin zip'
 cd ./build && zip -r ./lexi-theme-${version}.zip ./lexi-theme && cd ..

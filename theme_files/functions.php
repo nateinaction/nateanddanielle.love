@@ -2,12 +2,12 @@
 
 function lexi_enqueue_styles() {
   wp_enqueue_style( 'lexi_font', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500', false );
-	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . '/style.css', false, '0.6.0' );
+	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . '/style.css', false, '0.7.0' );
 }
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_styles' );
 
 function lexi_enqueue_scripts() {
-	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, '0.6.0', true );
+	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, '0.7.0', true );
   wp_localize_script( 'lexi_ui', 'lexiConfig', array(
       'endpoint' => esc_url_raw( rest_url() ),
       'nonce' => wp_create_nonce( 'wp_rest' ),
@@ -44,6 +44,78 @@ add_action( 'after_setup_theme', 'lexi_image_sizes' );
 
 // add support for featured images in posts
 add_theme_support( 'post-thumbnails' );
+
+/*
+* Adding ACF
+*/
+function lexi_acf_settings_path( $path ) {
+    $path = get_stylesheet_directory() . '/acf/';
+    return $path;
+}
+
+function lexi_acf_settings_dir( $dir ) {
+    $dir = get_stylesheet_directory_uri() . '/acf/';
+    return $dir;
+}
+
+add_filter('acf/settings/path', 'lexi_acf_settings_path');
+add_filter('acf/settings/dir', 'lexi_acf_settings_dir');
+add_filter('acf/settings/show_admin', '__return_false');
+
+include_once( get_stylesheet_directory() . '/acf/acf.php' );
+
+/*
+* On theme activation, setup custom fields
+*/
+
+function lexi_acf_setup_on_activate () {
+  if( function_exists('acf_add_local_field_group') ):
+
+  acf_add_local_field_group(array (
+  	'key' => 'group_5991f27225d2c',
+  	'title' => 'Lexi Theme',
+  	'fields' => array (
+  		array (
+  			'key' => 'field_5991f27df0d11',
+  			'label' => 'Link to embed',
+  			'name' => 'link_to_embed',
+  			'type' => 'url',
+  			'instructions' => 'This should work for all possible embeds: https://codex.wordpress.org/Embeds',
+  			'required' => 0,
+  			'conditional_logic' => 0,
+  			'wrapper' => array (
+  				'width' => '',
+  				'class' => '',
+  				'id' => '',
+  			),
+  			'default_value' => '',
+  			'placeholder' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+  		),
+  	),
+  	'location' => array (
+  		array (
+  			array (
+  				'param' => 'post_type',
+  				'operator' => '==',
+  				'value' => 'post',
+  			),
+  		),
+  	),
+  	'menu_order' => 0,
+  	'position' => 'normal',
+  	'style' => 'default',
+  	'label_placement' => 'top',
+  	'instruction_placement' => 'label',
+  	'hide_on_screen' => '',
+  	'active' => 1,
+  	'description' => '',
+  ));
+
+  endif;
+}
+add_action('after_switch_theme', 'lexi_acf_setup_on_activate');
+
+// to help with video embeds: https://codex.wordpress.org/Function_Reference/wp_oembed_get
 
 /*
 * REST API
