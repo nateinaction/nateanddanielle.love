@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 //import { red, purple } from 'material-ui/colors';
 import store from './store'
-import Header from './components/Header'
+import Header from './containers/Header'
 import Menu from './containers/Menu'
 import Posts from './containers/Posts'
 //import Test from './components/test'

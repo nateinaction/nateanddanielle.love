@@ -12,7 +12,7 @@ const srcSize = (imageType, maxWidth, imageDetails) => {
 
   if (imageType !== "image/gif") {
     // find available sizes for a given image
-    let availableSizes = [200,400,600,800,1200].filter(size => {
+    let availableSizes = [200,400,600,800,1200,1400,1600,1800,2000].filter(size => {
       return (typeof imageDetails.sizes[size] !== 'undefined')
     })
 

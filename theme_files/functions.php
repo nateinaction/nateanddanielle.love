@@ -35,6 +35,10 @@ function lexi_image_sizes() {
   add_image_size( '600', 600 );
   add_image_size( '800', 800 );
   add_image_size( '1200', 1200 );
+  add_image_size( '1400', 1400 );
+  add_image_size( '1600', 1600 );
+  add_image_size( '1800', 1800 );
+  add_image_size( '2000', 2000 );
 }
 add_action( 'after_setup_theme', 'lexi_image_sizes' );
 

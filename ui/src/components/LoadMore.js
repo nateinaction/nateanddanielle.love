@@ -9,8 +9,7 @@ const LoadMore = (props) => {
     message: 'Load More'
   }
   if (props.timeDirection === 'after' && props.timeline.latestLoaded.date === props.timeline.latest.date) {
-    config.disabled = true
-    config.message = 'Today'
+    return <div></div>
   }
   if (props.timeDirection === 'before' && props.timeline.earliestLoaded.date === props.timeline.earliest.date) {
     config.disabled = true
