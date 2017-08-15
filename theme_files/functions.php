@@ -2,12 +2,12 @@
 
 function lexi_enqueue_styles() {
   wp_enqueue_style( 'lexi_font', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500', false );
-	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . '/style.css', false, '0.7.0' );
+	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . '/style.css', false, '0.8.0' );
 }
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_styles' );
 
 function lexi_enqueue_scripts() {
-	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, '0.7.0', true );
+	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, '0.8.0', true );
   wp_localize_script( 'lexi_ui', 'lexiConfig', array(
       'endpoint' => esc_url_raw( rest_url() ),
       'nonce' => wp_create_nonce( 'wp_rest' ),
@@ -67,10 +67,7 @@ include_once( get_stylesheet_directory() . '/acf/acf.php' );
 /*
 * On theme activation, setup custom fields
 */
-
-function lexi_acf_setup_on_activate () {
-  if( function_exists('acf_add_local_field_group') ):
-
+function lexi_acf_setup() {
   acf_add_local_field_group(array (
   	'key' => 'group_5991f27225d2c',
   	'title' => 'Lexi Theme',
@@ -81,14 +78,6 @@ function lexi_acf_setup_on_activate () {
   			'name' => 'link_to_embed',
   			'type' => 'url',
   			'instructions' => 'This should work for all possible embeds: https://codex.wordpress.org/Embeds',
-  			'required' => 0,
-  			'conditional_logic' => 0,
-  			'wrapper' => array (
-  				'width' => '',
-  				'class' => '',
-  				'id' => '',
-  			),
-  			'default_value' => '',
   			'placeholder' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   		),
   	),
@@ -110,10 +99,31 @@ function lexi_acf_setup_on_activate () {
   	'active' => 1,
   	'description' => '',
   ));
-
-  endif;
 }
-add_action('after_switch_theme', 'lexi_acf_setup_on_activate');
+add_action('acf/init', 'lexi_acf_setup');
+
+/*
+* Add embed form to post endpoint
+*/
+function lexi_add_embed() {
+  register_rest_field( 'post', 'lexi_embed', array(
+    'get_callback' => function( $post_arr ) {
+      $response = array(
+        'embed_url' => get_field( "link_to_embed", $post_arr['id'] ),
+      );
+      $response['embed'] = !empty( $response['embed_url'] );
+      if ( $response['embed'] ) {
+        $response['embed_code'] = wp_oembed_get( $response['embed_url'] );
+      }
+      return (array) $response;
+    },
+    'schema' => array(
+      'description' => __( 'Link to embed.' ),
+      'type'        => 'string'
+    ),
+  ));
+};
+add_action( 'rest_api_init', 'lexi_add_embed' );
 
 // to help with video embeds: https://codex.wordpress.org/Function_Reference/wp_oembed_get
 

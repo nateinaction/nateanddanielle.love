@@ -1,3 +1,6 @@
+# Import .env
+source .env
+
 # Make build directory
 echo 'Creating build directory'
 if [ -d './build' ]; then
@@ -25,10 +28,12 @@ echo 'Contcatenating style.css'
 cat $(find ./ui/build/static/css/ -name '*.css') >> ./build/lexi-theme/style.css
 
 # adding ACF to build
-wget -O ./acf.zip "https://downloads.wordpress.org/plugin/advanced-custom-fields.latest-stable.zip"
+cd ./build/lexi-theme
+wget -O ./acf.zip "http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=${acflicense}"
 unzip ./acf.zip
 rm ./acf.zip
-mv ./advanced-custom-fields ./acf
+mv ./advanced-custom-fields-pro ./acf
+cd ../..
 
 # create plugin zip
 echo 'Creating plugin zip'
