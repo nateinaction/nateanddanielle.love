@@ -5,3 +5,8 @@
 .menu .flex {
   flex: 1;
 }
+
+.list {
+  width: 250px;
+  flex: 'initial';
+}

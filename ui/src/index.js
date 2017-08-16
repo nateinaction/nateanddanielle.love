@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 //import { red, purple } from 'material-ui/colors';
 import store from './store'
-import Header from './containers/Header'
+//import Header from './containers/Header'
 import Menu from './containers/Menu'
 import Posts from './containers/Posts'
 //import Test from './components/test'
@@ -15,16 +15,16 @@ import Posts from './containers/Posts'
 import './styles/index.css';
 
 import createPalette from 'material-ui/styles/palette';
-import { deepPurple, blue, red } from 'material-ui/colors';
+import { blue, deepOrange, red } from 'material-ui/colors';
 
 const theme = createMuiTheme({
   palette: createPalette({
-    primary: deepPurple,
+    primary: red,
     accent: {
       ...blue,
       A200: '#90CAF9',
     },
-    error: red,
+    error: deepOrange,
   }),
 });
 
@@ -35,7 +35,6 @@ render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <div>
-        <Header />
         <Menu />
         <Posts />
       </div>

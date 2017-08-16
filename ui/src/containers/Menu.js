@@ -5,6 +5,9 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
+import Drawer from 'material-ui/Drawer';
+import List, { ListItem, ListItemText } from 'material-ui/List';
+import openMenu from '../actions/openMenu'
 import '../styles/containers/Menu.css'
 
 class Menu extends Component {
@@ -14,13 +17,26 @@ class Menu extends Component {
         <AppBar position="static">
           <Toolbar>
             <IconButton color="contrast" aria-label="Menu">
-              <MenuIcon />
+              <MenuIcon
+                onClick={() => this.props.openMenu()} />
             </IconButton>
             <Typography type="title" color="inherit" className={'flex'}>
               {this.props.title}
             </Typography>
           </Toolbar>
         </AppBar>
+        <Drawer
+          open={this.props.menu.open}
+          onRequestClose={() => this.props.openMenu()}
+          onClick={() => this.props.openMenu()} >
+          <List className={'list'} disablePadding>
+            {this.props.menu.items.map((item, index) => (
+              <ListItem key={index} button>
+                <ListItemText primary="text" />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
       </div>
     );
   }
@@ -31,8 +47,13 @@ const mapStateToProps = (state) => ({
   menu: state.fromLocal.menu
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  openMenu: () => dispatch(openMenu())
+})
+
 const MenuContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Menu)
 
 export default MenuContainer
