@@ -6,7 +6,7 @@ const defaultObj = () => {
       title: 'Development Site',
       menu: {
         open: false,
-        items: ['test', 'test2']
+        items: JSON.parse('[{"title": "Home", "url": "http://localhost:3000"}, {"title": "About Me", "url": "https://nategay.me"}]')
       }
     }
   }
@@ -16,7 +16,7 @@ const defaultObj = () => {
     title: window.lexiConfig.title,
     menu: {
       open: false,
-      items: window.lexiConfig.menu
+      items: JSON.parse( window.lexiConfig.menu )
     }
   }
 }

@@ -2,25 +2,31 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
+import { red } from 'material-ui/colors';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import Drawer from 'material-ui/Drawer';
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List'
 import openMenu from '../actions/openMenu'
 import '../styles/containers/Menu.css'
+
+const style = {
+  color: red[600],
+  backgroundColor: 'white',
+}
 
 class Menu extends Component {
   render() {
     return (
       <div className={'menu'}>
-        <AppBar position="static">
+        <AppBar position="static" style={style}>
           <Toolbar>
-            <IconButton color="contrast" aria-label="Menu">
+            <IconButton style={style} aria-label="Menu">
               <MenuIcon
                 onClick={() => this.props.openMenu()} />
             </IconButton>
-            <Typography type="title" color="inherit" className={'flex'}>
+            <Typography type="title" style={style} className={'flex'}>
               {this.props.title}
             </Typography>
           </Toolbar>
@@ -31,8 +37,8 @@ class Menu extends Component {
           onClick={() => this.props.openMenu()} >
           <List className={'list'} disablePadding>
             {this.props.menu.items.map((item, index) => (
-              <ListItem key={index} button>
-                <ListItemText primary="text" />
+              <ListItem key={index} component="a" href={item.url} button>
+                <ListItemText primary={item.title} />
               </ListItem>
             ))}
           </List>
