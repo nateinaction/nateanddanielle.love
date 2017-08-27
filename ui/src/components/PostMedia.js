@@ -2,7 +2,7 @@ import React from 'react';
 //import { LinearProgress } from 'material-ui/Progress';
 import { CardMedia } from 'material-ui/Card';
 import PostImage from './PostImage'
-//import '../styles/components/PostMedia.css'
+import '../styles/components/PostMedia.css'
 
 const PostMedia = (props) => {
   if (props.post.lexi_embed.embed) {
@@ -11,7 +11,7 @@ const PostMedia = (props) => {
     }
     return (
       <CardMedia>
-        <div dangerouslySetInnerHTML={embedCode} />
+        <div className="embed-container" dangerouslySetInnerHTML={embedCode} />
       </CardMedia>
     )
   }
