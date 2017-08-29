@@ -2,12 +2,12 @@
 
 function lexi_enqueue_styles() {
   wp_enqueue_style( 'lexi_font', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500', false );
-	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . '/style.css', false, '0.9.4' );
+	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . '/style.css', false, '0.9.5' );
 }
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_styles' );
 
 function lexi_enqueue_scripts() {
-	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, '0.9.4', true );
+	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, '0.9.5', true );
   wp_localize_script( 'lexi_ui', 'lexiConfig', array(
       'endpoint' => esc_url_raw( rest_url() ),
       'nonce' => wp_create_nonce( 'wp_rest' ),

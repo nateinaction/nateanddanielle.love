@@ -12,8 +12,8 @@ class Post extends Component {
 
   render() {
     return (
-      <Grid item xs={12} sm={8} md={6}>
-        <Card className={'post'}>
+      <Grid className={'post'} item xs={12} sm={9} md={8} lg={6}>
+        <Card>
           <PostMedia
             fetching={this.props.media.fetching}
             media={this.props.media}
