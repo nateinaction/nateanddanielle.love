@@ -22,13 +22,13 @@ class Posts extends Component {
   render() {
     if (this.props.posts.posts.length === 0) {
       return (
-        <Grid container gutter={24} direction={'column'} align={'center'} className={'loading'}>
+        <Grid container direction={'column'} align={'center'} className={'loading'} >
           <CircularProgress size={150} className={'progress'} />
         </Grid>
       );
     }
     return (
-      <Grid container className={'posts'} direction={'column'} align={'center'} gutter={24} >
+      <Grid container className={'posts'} direction={'column'} align={'center'} >
         <LoadMore
           timeDirection={'after'}
           timeline={this.props.timeline}
