@@ -28,19 +28,23 @@ class Posts extends Component {
       );
     }
     return (
-      <Grid container direction={'column'} align={'center'} gutter={24} className={'posts'}>
+      <Grid container className={'posts'} direction={'column'} align={'center'} gutter={24} >
         <LoadMore
           timeDirection={'after'}
           timeline={this.props.timeline}
           fetchPosts={this.props.fetchPosts} />
-        {this.props.posts.posts.map((post, index) => (
-          <Post
-            key={index}
-            post={post}
-            media={this.props.media[post.featured_media]}
-            tags={this.props.tags}
-            openLightbox={this.props.openLightbox} />
-        ))}
+        <Grid item xs={12} sm={9} md={8} lg={6}>
+          <Grid container>
+          {this.props.posts.posts.map((post, index) => (
+            <Post
+              key={index}
+              post={post}
+              media={this.props.media[post.featured_media]}
+              tags={this.props.tags}
+              openLightbox={this.props.openLightbox} />
+          ))}
+          </Grid>
+        </Grid>
         <LoadMore
           timeDirection={'before'}
           timeline={this.props.timeline}
