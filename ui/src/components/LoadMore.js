@@ -16,7 +16,7 @@ const LoadMore = (props) => {
     config.message = 'The beginning...'
   }
   return (
-    <Grid item xs={12} className={'load-more'}>
+    <Grid item className={'load-more'}>
       <Button
         raised
         color="primary"
