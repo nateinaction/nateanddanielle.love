@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import { red } from 'material-ui/colors';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
@@ -11,22 +10,17 @@ import List, { ListItem, ListItemText } from 'material-ui/List'
 import openMenu from '../actions/openMenu'
 import '../styles/containers/Menu.css'
 
-const style = {
-  color: red[600],
-  backgroundColor: 'white',
-}
-
 class Menu extends Component {
   render() {
     return (
       <div className={'menu'}>
-        <AppBar position="static" style={style}>
+        <AppBar position="static" style={{backgroundColor: 'white'}}>
           <Toolbar>
-            <IconButton style={style} aria-label="Menu">
+            <IconButton color={'primary'} aria-label="Menu">
               <MenuIcon
                 onClick={() => this.props.openMenu()} />
             </IconButton>
-            <Typography type="title" style={style} className={'flex'}>
+            <Typography type="title" color={'default'} className={'flex'}>
               {this.props.title}
             </Typography>
           </Toolbar>
