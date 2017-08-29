@@ -33,7 +33,7 @@ class Menu extends Component {
         </AppBar>
         <Drawer
           open={this.props.menu.open}
-          onRequestClose={() => this.props.openMenu()}
+          onRequestClose={() => this.props.openMenu}
           onClick={() => this.props.openMenu()} >
           <List className={'list'} disablePadding>
             {this.props.menu.items.map((item, index) => (
