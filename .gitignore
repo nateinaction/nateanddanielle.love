@@ -2,11 +2,13 @@
 
 # dependencies
 node_modules
+vendor
 
 # testing
 coverage
 
 # production
+artifacts
 build
 
 # misc
