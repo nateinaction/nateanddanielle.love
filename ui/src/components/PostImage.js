@@ -1,6 +1,6 @@
 import React from 'react';
-import { LinearProgress } from 'material-ui/Progress';
-import { CardMedia } from 'material-ui/Card';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import CardMedia from '@material-ui/core/CardMedia';
 import '../styles/components/PostImage.css';
 
 const srcSize = (imageType, maxWidth, imageDetails) => {

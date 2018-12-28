@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Grid from 'material-ui/Grid';
-import { CircularProgress } from 'material-ui/Progress';
+import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Lightbox from 'react-images';
 
 import fetchTimeline from '../actions/fetchTimeline';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Grid from 'material-ui/Grid';
-import Card from 'material-ui/Card';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import PostMedia from './PostMedia';
 import PostContent from './PostContent';
 import '../styles/components/Post.css';

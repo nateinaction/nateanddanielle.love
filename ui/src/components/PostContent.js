@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardContent } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import PostMeta from './PostMeta';
 // import '../styles/components/PostContent.css'
 

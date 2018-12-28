@@ -3,7 +3,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { blue, deepOrange, red } from '@material-ui/core/colors';
 // import { red, purple } from 'material-ui/colors';
 import store from './store';
 // import Header from './containers/Header'
@@ -14,18 +15,15 @@ import Posts from './containers/Posts';
 // import registerServiceWorker from './registerServiceWorker';
 import './styles/index.css';
 
-import createPalette from 'material-ui/styles/palette';
-import { blue, deepOrange, red } from 'material-ui/colors';
-
 const theme = createMuiTheme({
-  palette: createPalette({
+  palette: {
     primary: red,
     accent: {
       ...blue,
       A200: '#90CAF9',
     },
     error: deepOrange,
-  }),
+  },
 });
 
 // const primary = red[500]; // #F44336

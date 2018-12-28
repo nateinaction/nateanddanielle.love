@@ -1,6 +1,6 @@
 import React from 'react';
 // import { LinearProgress } from 'material-ui/Progress';
-import { CardMedia } from 'material-ui/Card';
+import CardMedia from '@material-ui/core/CardMedia';
 import PostImage from './PostImage';
 import '../styles/components/PostMedia.css';
 

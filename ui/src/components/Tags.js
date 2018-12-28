@@ -1,5 +1,5 @@
 import React from 'react';
-import Chip from 'material-ui/Chip';
+import Chip from '@material-ui/core/Chip';
 import '../styles/components/Tags.css';
 
 const Tags = props => (

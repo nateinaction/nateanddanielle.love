@@ -1,5 +1,5 @@
 import React from 'react';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 // import Tags from './Tags'
 import moment from 'moment';
 // import '../styles/components/PostMeta.css'

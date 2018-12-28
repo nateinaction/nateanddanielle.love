@@ -1,6 +1,6 @@
 import React from 'react';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import '../styles/components/LoadMore.css';
 
 const LoadMore = (props) => {
