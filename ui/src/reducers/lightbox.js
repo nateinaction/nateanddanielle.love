@@ -1,22 +1,22 @@
 const defaultObj = {
   images: [],
-  isOpen: false
-}
+  isOpen: false,
+};
 
 const lightbox = (state = defaultObj, action) => {
-	switch (action.type) {
-		case 'OPEN_LIGHTBOX':
+  switch (action.type) {
+    case 'OPEN_LIGHTBOX':
       return Object.assign({}, state, {
         images: action.imagesArray,
-        isOpen: true
-      })
+        isOpen: true,
+      });
     case 'CLOSE_LIGHTBOX':
       return Object.assign({}, state, {
-        isOpen: false
-      })
-		default:
-			return state
-	}
-}
+        isOpen: false,
+      });
+    default:
+      return state;
+  }
+};
 
-export default lightbox
+export default lightbox;

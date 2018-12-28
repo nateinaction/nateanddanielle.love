@@ -6,9 +6,9 @@ const defaultObj = () => {
       title: 'Development Site',
       menu: {
         open: false,
-        items: JSON.parse('[{"title": "Home", "url": "http://localhost:3000"}, {"title": "About Me", "url": "https://nategay.me"}]')
-      }
-    }
+        items: JSON.parse('[{"title": "Home", "url": "http://localhost:3000"}, {"title": "About Me", "url": "https://nategay.me"}]'),
+      },
+    };
   }
   return {
     endpoint: window.lexiConfig.endpoint,
@@ -16,23 +16,23 @@ const defaultObj = () => {
     title: window.lexiConfig.title,
     menu: {
       open: false,
-      items: JSON.parse( window.lexiConfig.menu )
-    }
-  }
-}
+      items: JSON.parse(window.lexiConfig.menu),
+    },
+  };
+};
 
 const fromLocal = (state = defaultObj(), action) => {
-	switch (action.type) {
+  switch (action.type) {
     case 'OPEN_MENU':
       return Object.assign({}, state, {
-        'menu': {
+        menu: {
           open: !state.menu.open,
-          items: state.menu.items
-        }
-      })
-		default:
-			return state
-	}
-}
+          items: state.menu.items,
+        },
+      });
+    default:
+      return state;
+  }
+};
 
-export default fromLocal
+export default fromLocal;

@@ -11,7 +11,7 @@ DOCKER_RUN := docker run --rm -v `pwd`:/workspace
 WP_TEST_IMAGE := nateinaction/wordpress-integration:php7.2
 COMPOSER_IMAGE := -v `pwd`:/app -v ~/.composer/cache:/tmp/cache composer
 VENDOR_BIN_DIR := /workspace/vendor/bin
-NODE_IMAGE := node:11
+NODE_IMAGE := -v ~/.npm:/root/.npm -w /workspace/ui/ node:11
 
 # Commands
 all: setup lint build
@@ -19,10 +19,13 @@ all: setup lint build
 shell:
 	$(DOCKER_RUN) -it --entrypoint "/bin/bash" $(WP_TEST_IMAGE)
 
-setup: composer_install yarn_install
+shell_node:
+	$(DOCKER_RUN) -it --entrypoint "/bin/bash" $(NODE_IMAGE)
 
-yarn_install:
-	$(DOCKER_RUN) --entrypoint "yarn" $(NODE_IMAGE) --cwd /workspace/$(JS_DIR) install --non-interactive
+setup: composer_install npm_install
+
+npm_install:
+	$(DOCKER_RUN) --entrypoint "npm" $(NODE_IMAGE) install
 
 composer_install:
 	$(DOCKER_RUN) $(COMPOSER_IMAGE) install
@@ -52,7 +55,7 @@ move_acf_vendor_to_build:
 	rsync -r vendor/acf/ $(BUILD_DIR)/$(THEME_NAME)/acf/
 
 build_react_app:
-	$(DOCKER_RUN) --entrypoint "yarn" $(NODE_IMAGE) --cwd /workspace/$(JS_DIR) build
+	$(DOCKER_RUN) --entrypoint "npm" $(NODE_IMAGE) build
 
 build_zip: clean move_acf_vendor_to_build
 	mkdir -p $(ARTIFACTS_DIR)

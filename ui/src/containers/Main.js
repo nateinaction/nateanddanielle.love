@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Grid from 'material-ui/Grid'
-import fetchPosts from '../actions/fetchPosts'
-import '../styles/containers/Main.css'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Grid from 'material-ui/Grid';
+import fetchPosts from '../actions/fetchPosts';
+import '../styles/containers/Main.css';
 
 class Main extends Component {
   render() {
@@ -14,18 +14,18 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   posts: state.posts,
-  media: state.media
-})
+  media: state.media,
+});
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchPosts: (page) => dispatch(fetchPosts(page))
-})
+const mapDispatchToProps = dispatch => ({
+  fetchPosts: page => dispatch(fetchPosts(page)),
+});
 
 const MainContainer = connect(
   mapStateToProps,
-	mapDispatchToProps
-)(Main)
+  mapDispatchToProps,
+)(Main);
 
-export default MainContainer
+export default MainContainer;

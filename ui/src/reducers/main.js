@@ -1,13 +1,13 @@
 /* @flow */
 
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-import posts from './posts'
-import media from './media'
-import tags from './tags'
-import timeline from './timeline'
-import lightbox from './lightbox'
-import fromLocal from './fromLocal'
+import posts from './posts';
+import media from './media';
+import tags from './tags';
+import timeline from './timeline';
+import lightbox from './lightbox';
+import fromLocal from './fromLocal';
 
 /*
 posts: {
@@ -30,12 +30,12 @@ media: {
 */
 
 const reducers = combineReducers({
-	posts,
+  posts,
   media,
-	tags,
-	timeline,
-	lightbox,
-	fromLocal
-})
+  tags,
+  timeline,
+  lightbox,
+  fromLocal,
+});
 
-export default reducers
+export default reducers;

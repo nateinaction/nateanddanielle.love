@@ -2,56 +2,56 @@
 
 const defaultTimeline = {
   latest: {
-    fetching: false
+    fetching: false,
   },
   earliest: {
-    fetching: false
+    fetching: false,
   },
   latestLoaded: {
-    fetching: false
+    fetching: false,
   },
   earliestLoaded: {
-    fetching: false
-  }
-}
+    fetching: false,
+  },
+};
 
 const timeline = (state = defaultTimeline, action) => {
-	switch (action.type) {
-		case 'FETCHING_TIMELINE':
+  switch (action.type) {
+    case 'FETCHING_TIMELINE':
       return Object.assign(state, {
         latest: {
-          fetching: true
+          fetching: true,
         },
         earliest: {
-          fetching: true
-        }
-      })
+          fetching: true,
+        },
+      });
     case 'FETCHING_POSTS':
       return Object.assign(state, {
         latestLoaded: Object.assign(state.latestLoaded, {
-          fetching: true
+          fetching: true,
         }),
         earliestLoaded: Object.assign(state.latestLoaded, {
-          fetching: true
-        })
-      })
+          fetching: true,
+        }),
+      });
     case 'SET_POSTS':
       return Object.assign(state, {
         latestLoaded: {
           fetching: false,
-          date: action.date.latestLoaded
+          date: action.date.latestLoaded,
         },
         earliestLoaded: {
           fetching: false,
-          date: action.date.earliestLoaded
-        }
-      })
+          date: action.date.earliestLoaded,
+        },
+      });
     case 'SET_TIMELINE':
-		case 'UPDATE_TIMELINE':
-      return Object.assign(state, action.timeline)
-		default:
-			return state
-	}
-}
+    case 'UPDATE_TIMELINE':
+      return Object.assign(state, action.timeline);
+    default:
+      return state;
+  }
+};
 
-export default timeline
+export default timeline;

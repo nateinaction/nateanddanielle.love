@@ -1,6 +1,6 @@
-const openLightbox = (imagesArray) => ({
-	type: 'OPEN_LIGHTBOX',
-	imagesArray
-})
+const openLightbox = imagesArray => ({
+  type: 'OPEN_LIGHTBOX',
+  imagesArray,
+});
 
 export default openLightbox;

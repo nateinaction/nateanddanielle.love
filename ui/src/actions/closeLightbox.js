@@ -1,5 +1,5 @@
 const closeLightbox = () => ({
-	type: 'CLOSE_LIGHTBOX'
-})
+  type: 'CLOSE_LIGHTBOX',
+});
 
 export default closeLightbox;

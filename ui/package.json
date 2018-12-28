@@ -16,13 +16,20 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
     "flow-bin": "^0.53.1",
     "react-scripts": "^1.0.12"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node_modules/.bin/react-scripts start",
+    "build": "node_modules/.bin/react-scripts build",
+    "lint": "node_modules/.bin/node_modules/.bin/eslint ./src",
+    "lintfix": "node_modules/.bin/node_modules/.bin/eslint --fix ./src",
+    "test": "node_modules/.bin/react-scripts test --env=jsdom",
+    "eject": "node_modules/.bin/react-scripts eject"
   }
 }

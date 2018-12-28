@@ -1,42 +1,41 @@
 import axios from 'axios';
 
-import setFetching from './setFetching'
-import setTimeline from './setTimeline'
+import setFetching from './setFetching';
+import setTimeline from './setTimeline';
 
 const fetchTimeline = (order = 'desc') => (
   (dispatch, getState) => {
-    dispatch(setFetching('timeline'))
+    dispatch(setFetching('timeline'));
 
-    const url = `${getState().fromLocal.endpoint}wp/v2/posts`
+    const url = `${getState().fromLocal.endpoint}wp/v2/posts`;
     const config = {
       params: {
         per_page: '1',
-        order
-      }
-    }
+        order,
+      },
+    };
     return axios(url, config)
-      .then(res => {
+      .then((res) => {
         if (order === 'desc') {
-          dispatch(fetchTimeline('asc'))
+          dispatch(fetchTimeline('asc'));
           return dispatch(setTimeline({
             latest: {
               fetching: false,
-              date: res.data[0].date
-            }
-          }))
+              date: res.data[0].date,
+            },
+          }));
         }
         return dispatch(setTimeline({
           earliest: {
             fetching: false,
-            date: res.data[0].date
-          }
-        }))
+            date: res.data[0].date,
+          },
+        }));
       })
-      .catch(err => {
-        if (err) console.log(err)
-        return
+      .catch((err) => {
+        if (err) console.log(err);
       });
   }
-)
+);
 
-export default fetchTimeline
+export default fetchTimeline;

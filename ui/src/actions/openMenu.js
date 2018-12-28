@@ -1,5 +1,5 @@
 const openMenu = () => ({
-	type: 'OPEN_MENU'
-})
+  type: 'OPEN_MENU',
+});
 
 export default openMenu;
