@@ -1,6 +1,5 @@
 import React from 'react';
-// import { LinearProgress } from 'material-ui/Progress';
-import CardMedia from '@material-ui/core/CardMedia';
+import PropTypes from 'prop-types';
 import PostImage from './PostImage';
 import '../styles/components/PostMedia.css';
 
@@ -10,20 +9,38 @@ const PostMedia = (props) => {
       __html: props.post.lexi_embed.embed_code,
     };
     return (
-      <CardMedia>
-        <div className="embed-container" dangerouslySetInnerHTML={embedCode} />
-      </CardMedia>
+      <div className="embed-container" dangerouslySetInnerHTML={embedCode} />
     );
   }
 
   return (
     <PostImage
-      fetching={props.media.fetching}
       media={props.media}
       width={props.width}
       openLightbox={props.openLightbox}
     />
   );
+};
+
+PostMedia.propTypes = {
+  media: PropTypes.shape({
+    fetching: PropTypes.bool,
+    alt_text: PropTypes.string,
+    media_details: PropTypes.object,
+    mime_type: PropTypes.string,
+  }).isRequired,
+  post: PropTypes.shape({
+    lexi_embed: PropTypes.shape({
+      embed: PropTypes.bool,
+      embed_code: PropTypes.string,
+    }),
+  }).isRequired,
+  width: PropTypes.number,
+  openLightbox: PropTypes.func.isRequired,
+};
+
+PostMedia.defaultProps = {
+  width: 0,
 };
 
 export default PostMedia;

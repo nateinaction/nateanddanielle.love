@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import PostMeta from './PostMeta';
@@ -22,5 +23,25 @@ const PostContent = props => (
     />
   </CardContent>
 );
+
+PostContent.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    lexi_embed: PropTypes.shape({
+      embed_code: PropTypes.string,
+    }),
+    title: PropTypes.shape({
+      rendered: PropTypes.string.isRequired,
+    }).isRequired,
+    content: PropTypes.shape({
+      rendered: PropTypes.string.isRequired,
+    }).isRequired,
+    date: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }).isRequired,
+  tags: PropTypes.shape({
+    fetching: PropTypes.bool,
+  }).isRequired,
+};
 
 export default PostContent;

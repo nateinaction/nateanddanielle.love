@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import '../styles/components/LoadMore.css';
@@ -18,8 +19,8 @@ const LoadMore = (props) => {
   return (
     <Grid item className="load-more">
       <Button
-        raised
         color="primary"
+        variant="contained"
         className={`more ${props.timeDirection}`}
         disabled={config.disabled}
         onClick={() => props.fetchPosts(props.timeDirection, props.timeline.earliestLoaded.date)}
@@ -28,6 +29,29 @@ const LoadMore = (props) => {
       </Button>
     </Grid>
   );
+};
+
+LoadMore.propTypes = {
+  timeDirection: PropTypes.string.isRequired,
+  timeline: PropTypes.shape({
+    latest: PropTypes.shape({
+      fetching: PropTypes.bool.isRequired,
+      date: PropTypes.string,
+    }).isRequired,
+    earliest: PropTypes.shape({
+      fetching: PropTypes.bool.isRequired,
+      date: PropTypes.string,
+    }).isRequired,
+    latestLoaded: PropTypes.shape({
+      fetching: PropTypes.bool.isRequired,
+      date: PropTypes.string,
+    }).isRequired,
+    earliestLoaded: PropTypes.shape({
+      fetching: PropTypes.bool.isRequired,
+      date: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  fetchPosts: PropTypes.func.isRequired,
 };
 
 export default LoadMore;

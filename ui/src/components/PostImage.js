@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import CardMedia from '@material-ui/core/CardMedia';
 import '../styles/components/PostImage.css';
@@ -31,7 +32,7 @@ const srcSize = (imageType, maxWidth, imageDetails) => {
 
 const PostImage = (props) => {
   // if fetching show loading bar
-  if (props.fetching) {
+  if (props.media.fetching) {
     return (
       <LinearProgress className="fetching" />
     );
@@ -45,15 +46,29 @@ const PostImage = (props) => {
   };
   const image = srcSize(media.type, media.maxWidth, media.details);
   return (
-    <CardMedia>
-      <img
-        className="post-image"
+    <button type="button" onClick={() => props.openLightbox([image])}>
+      <CardMedia
+        title={props.media.alt_text}
         src={image.featured}
-        alt={props.media.alt_text}
-        onClick={() => props.openLightbox([image])}
+        component="img"
       />
-    </CardMedia>
+    </button>
   );
+};
+
+PostImage.propTypes = {
+  media: PropTypes.shape({
+    fetching: PropTypes.bool,
+    alt_text: PropTypes.string,
+    media_details: PropTypes.object,
+    mime_type: PropTypes.string,
+  }).isRequired,
+  width: PropTypes.number,
+  openLightbox: PropTypes.func.isRequired,
+};
+
+PostImage.defaultProps = {
+  width: 0,
 };
 
 export default PostImage;

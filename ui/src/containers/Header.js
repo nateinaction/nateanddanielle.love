@@ -1,4 +1,7 @@
+/* global document:true */
+
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fetchMedia from '../actions/fetchMedia';
 import '../styles/components/Header.css';
@@ -33,6 +36,11 @@ class Header extends Component {
     return <div className="header" />;
   }
 }
+
+Header.propTypes = {
+  media: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fetchMedia: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   media: state.media,

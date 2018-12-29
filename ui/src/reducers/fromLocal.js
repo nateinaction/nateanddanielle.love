@@ -8,7 +8,7 @@ const defaultObj = () => {
       title: 'Development Site',
       menu: {
         open: false,
-        items: JSON.parse('[{"title": "Home", "url": "http://localhost:3000"}, {"title": "About Me", "url": "https://nategay.me"}]'),
+        items: JSON.parse('[{"ID": 0, "title": "Home", "url": "http://localhost:3000"}, {"ID": 1, "title": "About Me", "url": "https://nategay.me"}]'),
       },
     };
   }
