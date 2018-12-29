@@ -29,7 +29,7 @@ const Menu = props => (
     </AppBar>
     <Drawer
       open={props.menu.open}
-      onRequestClose={() => props.openMenu}
+      onClose={() => props.openMenu}
       onClick={() => props.openMenu()}
     >
       <List className="list" disablePadding>
