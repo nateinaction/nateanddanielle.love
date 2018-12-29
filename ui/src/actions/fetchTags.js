@@ -21,11 +21,12 @@ const fetchTags = tagArray => (
         },
       };
       return axios(url, config)
-  			.then(res => dispatch(setTags(res.data)))
-  		  .catch((err) => {
-  				if (err) console.log(err);
-  		  });
+        .then(res => dispatch(setTags(res.data)))
+        .catch((err) => {
+          if (err) console.error(err);
+        });
     }
+    return null;
   }
 );
 

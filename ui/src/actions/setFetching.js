@@ -1,23 +1,24 @@
-const setFetching = (item_type, item_info) => {
-  if (item_type === 'posts') {
+const setFetching = (itemType, itemInfo) => {
+  if (itemType === 'posts') {
     return {
-    	type: 'FETCHING_POSTS',
+      type: 'FETCHING_POSTS',
     };
-  } if (item_type === 'media') {
+  } if (itemType === 'media') {
     return {
-    	type: 'FETCHING_MEDIA',
-      keys: item_info,
+      type: 'FETCHING_MEDIA',
+      keys: itemInfo,
     };
-  } if (item_type === 'timeline') {
+  } if (itemType === 'timeline') {
     return {
-    	type: 'FETCHING_TIMELINE',
+      type: 'FETCHING_TIMELINE',
     };
-  } if (item_type === 'tags') {
+  } if (itemType === 'tags') {
     return {
-    	type: 'FETCHING_TAGS',
-      keys: item_info,
+      type: 'FETCHING_TAGS',
+      keys: itemInfo,
     };
   }
+  return null;
 };
 
 export default setFetching;

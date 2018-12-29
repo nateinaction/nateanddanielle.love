@@ -33,7 +33,7 @@ const fetchTimeline = (order = 'desc') => (
         }));
       })
       .catch((err) => {
-        if (err) console.log(err);
+        if (err) console.error(err);
       });
   }
 );

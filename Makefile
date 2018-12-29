@@ -36,11 +36,16 @@ composer_update:
 composer_update_nothing:
 	$(DOCKER_RUN) $(COMPOSER_IMAGE) update nothing
 
-lint:
+lint: lint_php lint_js
+
+lint_php:
 	$(DOCKER_RUN) --entrypoint "$(VENDOR_BIN_DIR)/phpcs" $(WP_TEST_IMAGE) .
 
 phpcbf:
 	$(DOCKER_RUN) --entrypoint "$(VENDOR_BIN_DIR)/phpcbf" $(WP_TEST_IMAGE) .
+
+lint_js:
+	$(DOCKER_RUN) --entrypoint "npm" $(NODE_IMAGE) run lint
 
 clean:
 	rm -rf build

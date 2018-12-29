@@ -25,7 +25,11 @@ const fetchPosts = (timeDirection = 'before', date = new Date().toISOString()) =
           content.media.push(post.featured_media);
 
           // filter out duplicates
-          content.tags = content.tags.concat(post.tags.filter(tag => (content.tags.indexOf(tag) === -1)));
+          content.tags = content.tags.concat(
+            post.tags.filter(
+              tag => (content.tags.indexOf(tag) === -1),
+            ),
+          );
         });
 
         dispatch(fetchTags(content.tags));
@@ -36,15 +40,17 @@ const fetchPosts = (timeDirection = 'before', date = new Date().toISOString()) =
           timeline.latestLoaded = getState().timeline.latestLoaded.date || res.data[0].date;
           timeline.earliestLoaded = res.data[res.data.length - 1].date;
         } else {
+          const stateEarliestLoaded = getState().timeline.earliestLoaded.date;
+          const resEarliestLoaded = res.data[res.data.length - 1].date;
           timeline.latestLoaded = res.data[0].date;
-          timeline.earliestLoaded = getState().timeline.earliestLoaded.date || res.data[res.data.length - 1].date;
+          timeline.earliestLoaded = stateEarliestLoaded || resEarliestLoaded;
         }
 
         return dispatch(setPosts(timeDirection, res.data, timeline));
       })
-		  .catch((err) => {
-        if (err) console.log(err);
-		  });
+      .catch((err) => {
+        if (err) console.error(err);
+      });
   }
 );
 

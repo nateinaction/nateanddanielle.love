@@ -17,9 +17,9 @@ const fetchMedia = mediaArray => (
       .then(res => (
         dispatch(setMedia(res.data))
       ))
-		  .catch((err) => {
-        if (err) console.log(err);
-		  });
+      .catch((err) => {
+        if (err) console.error(err);
+      });
   }
 );
 
