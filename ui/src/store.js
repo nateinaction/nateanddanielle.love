@@ -21,9 +21,9 @@ export default store;
  * Redux state to console log
  */
 
-console.log('initial state');
-console.log(store.getState());
-store.subscribe(() => console.log(store.getState()));
+// console.log('initial state');
+// console.log(store.getState());
+// store.subscribe(() => console.log(store.getState()));
 
 /*
 store.dispatch(fetchPosts())

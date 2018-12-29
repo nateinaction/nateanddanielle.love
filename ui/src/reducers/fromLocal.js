@@ -1,3 +1,5 @@
+/* global window:true */
+
 const defaultObj = () => {
   if (typeof window.lexiConfig === 'undefined') {
     return {

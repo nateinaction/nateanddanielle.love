@@ -14,8 +14,8 @@ const fetchMediaHelper = (state, action) => {
 
 const setMediaHelper = (state, action) => {
   let response = Object.assign({}, state);
-  action.media.forEach((item, index) => {
-    item.fetching = false;
+  action.media.forEach((item) => {
+    Object.assign(item, { fetching: false });
     response = Object.assign(response, { [item.id]: item });
   });
   return response;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -36,9 +37,9 @@ class Posts extends Component {
         />
         <Grid item xs={12} sm={9} md={8} lg={6}>
           <Grid container>
-            {this.props.posts.posts.map((post, index) => (
+            {this.props.posts.posts.map(post => (
               <Post
-                key={index}
+                key={post.id}
                 post={post}
                 media={this.props.media[post.featured_media]}
                 tags={this.props.tags}
@@ -63,6 +64,42 @@ class Posts extends Component {
     );
   }
 }
+Posts.propTypes = {
+  media: PropTypes.objectOf(PropTypes.object).isRequired,
+  tags: PropTypes.shape({
+    fetching: PropTypes.bool,
+  }).isRequired,
+  timeline: PropTypes.shape({
+    latest: PropTypes.shape({
+      fetching: PropTypes.bool.isRequired,
+      date: PropTypes.string,
+    }).isRequired,
+    earliest: PropTypes.shape({
+      fetching: PropTypes.bool.isRequired,
+      date: PropTypes.string,
+    }).isRequired,
+    latestLoaded: PropTypes.shape({
+      fetching: PropTypes.bool.isRequired,
+      date: PropTypes.string,
+    }).isRequired,
+    earliestLoaded: PropTypes.shape({
+      fetching: PropTypes.bool.isRequired,
+      date: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  lightbox: PropTypes.shape({
+    images: PropTypes.arrayOf(PropTypes.object).isRequired,
+    isOpen: PropTypes.bool.isRequired,
+  }).isRequired,
+  posts: PropTypes.shape({
+    fetching: PropTypes.bool,
+    posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }).isRequired,
+  closeLightbox: PropTypes.func.isRequired,
+  openLightbox: PropTypes.func.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
+  fetchTimeline: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   timeline: state.timeline,

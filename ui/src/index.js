@@ -1,3 +1,4 @@
+/* global document:true */
 /* @flow */
 
 import React from 'react';
@@ -16,6 +17,9 @@ import Posts from './containers/Posts';
 import './styles/index.css';
 
 const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     primary: red,
     accent: {

@@ -3,7 +3,7 @@ const organizePosts = (state, action) => {
   posts.sort((a, b) => {
     const aDate = new Date(a.date);
     const bDate = new Date(b.date);
-	  return bDate - aDate;
+    return bDate - aDate;
   });
   return posts;
 };

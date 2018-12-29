@@ -14,8 +14,8 @@ const fetchTagsHelper = (state, action) => {
 
 const setTagsHelper = (state, action) => {
   let response = Object.assign({}, { fetching: false }, state);
-  action.tags.forEach((tag, index) => {
-    tag.fetching = false;
+  action.tags.forEach((tag) => {
+    Object.assign(tag, { fetching: false });
     response = Object.assign(response, { [tag.id]: tag });
   });
   return response;
