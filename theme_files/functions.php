@@ -26,12 +26,12 @@ function lexi_enqueue_scripts() {
 	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, '0.9.13', true );
 	wp_localize_script(
 		'lexi_ui',
-		'lexiConfig',
+		'dataOnPageLoad',
 		array(
 			'endpoint' => esc_url_raw( rest_url() ),
-			'menu'     => wp_json_encode( wp_get_nav_menu_items( get_nav_menu_locations()['primary'] ) ),
+			'menu'     => wp_get_nav_menu_items( get_nav_menu_locations()['primary'] ),
 			'nonce'    => wp_create_nonce( 'wp_rest' ),
-			'timeline' => lexi_get_timeline_meta(),
+			'fetchPostsStore' => lexi_fetch_posts_data(),
 			'title'    => get_bloginfo( 'name' ),
 		)
 	);
@@ -41,13 +41,13 @@ add_action( 'wp_enqueue_scripts', 'lexi_enqueue_scripts' );
 /**
  * Get latest and oldest post dates
  */
-function lexi_get_timeline_meta() {
+function lexi_fetch_posts_data() {
 	global $wpdb;
 	return array(
-		'oldest' => $wpdb->get_row(
+		'earliestPossible' => $wpdb->get_var(
 			"SELECT post_date FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish' ORDER BY post_date ASC"
 		),
-		'latest' => $wpdb->get_row(
+		'latestPossible' => $wpdb->get_var(
 			"SELECT post_date FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish' ORDER BY post_date DESC"
 		),
 	);

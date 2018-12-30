@@ -1,14 +1,15 @@
 /* global window:true */
 
 const defaultState = {
-  endpoint: window.dataOnPageLoad.endpoint,
-  nonce: window.dataOnPageLoad.nonce,
-  title: window.dataOnPageLoad.title,
+  menu: {
+    open: false,
+    items: window.dataOnPageLoad.menu,
+  },
 };
 
-const fromLocal = (state = defaultState, action) => {
+const menuStore = (state = defaultState, action) => {
   switch (action.type) {
-    case 'OPEN_MENU':
+    case 'TOGGLE_MENU_VISIBILITY':
       return Object.assign({}, state, {
         menu: {
           open: !state.menu.open,
@@ -20,4 +21,4 @@ const fromLocal = (state = defaultState, action) => {
   }
 };
 
-export default fromLocal;
+export default menuStore;

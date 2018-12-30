@@ -19,10 +19,6 @@ const Menu = props => (
 
 Menu.propTypes = {
   title: PropTypes.string.isRequired,
-  menu: PropTypes.shape({
-    open: PropTypes.bool,
-    items: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
 };
 
 const mapStateToProps = state => ({
