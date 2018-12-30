@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import PostMeta from './PostMeta';
-// import '../styles/components/PostContent.css'
 
 const PostContent = props => (
   <CardContent>
@@ -38,9 +37,6 @@ PostContent.propTypes = {
     }).isRequired,
     date: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }).isRequired,
-  tags: PropTypes.shape({
-    fetching: PropTypes.bool,
   }).isRequired,
 };
 

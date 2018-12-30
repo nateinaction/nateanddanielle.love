@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PostImage from './PostImage';
-import '../styles/components/PostMedia.css';
 
 const PostMedia = (props) => {
   if (props.post.lexi_embed.embed) {

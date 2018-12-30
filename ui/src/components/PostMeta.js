@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-// import Tags from './Tags'
 import moment from 'moment';
-// import '../styles/components/PostMeta.css'
 
 const PostMeta = props => (
   <div className="post-meta">

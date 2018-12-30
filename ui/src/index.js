@@ -1,20 +1,16 @@
 /* global document:true */
-/* @flow */
 
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { blue, deepOrange, red } from '@material-ui/core/colors';
-// import { red, purple } from 'material-ui/colors';
 import store from './store';
-// import Header from './containers/Header'
-import Menu from './containers/Menu';
-import Posts from './containers/Posts';
-// import Test from './components/test'
+import Menu from './components/Menu';
+import Posts from './components/Posts';
 
 // import registerServiceWorker from './registerServiceWorker';
-import './styles/index.css';
+import './index.css';
 
 const theme = createMuiTheme({
   typography: {

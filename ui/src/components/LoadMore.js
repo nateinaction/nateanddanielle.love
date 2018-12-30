@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import '../styles/components/LoadMore.css';
 
 const LoadMore = (props) => {
   const config = {

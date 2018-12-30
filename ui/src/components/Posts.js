@@ -10,9 +10,8 @@ import fetchPosts from '../actions/fetchPosts';
 import openLightbox from '../actions/openLightbox';
 import closeLightbox from '../actions/closeLightbox';
 
-import Post from '../components/Post';
-import LoadMore from '../components/LoadMore';
-import '../styles/containers/Posts.css';
+import Post from './Post';
+import LoadMore from './LoadMore';
 
 class Posts extends Component {
   componentDidMount() {
@@ -66,9 +65,6 @@ class Posts extends Component {
 }
 Posts.propTypes = {
   media: PropTypes.objectOf(PropTypes.object).isRequired,
-  tags: PropTypes.shape({
-    fetching: PropTypes.bool,
-  }).isRequired,
   timeline: PropTypes.shape({
     latest: PropTypes.shape({
       fetching: PropTypes.bool.isRequired,
@@ -105,7 +101,6 @@ const mapStateToProps = state => ({
   timeline: state.timeline,
   posts: state.posts,
   media: state.media,
-  tags: state.tags,
   lightbox: state.lightbox,
 });
 

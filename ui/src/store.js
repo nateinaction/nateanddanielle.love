@@ -1,11 +1,7 @@
-/* @flow */
-
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import reducers from './reducers/main';
-
-// import fetchTags from './actions/fetchTags'
 
 /*
  * Redux Store
@@ -29,4 +25,3 @@ store.subscribe(() => console.log(store.getState()));
 store.dispatch(fetchPosts())
 store.dispatch(fetchPosts(2))
 */
-// store.dispatch(fetchTags([12,17]))

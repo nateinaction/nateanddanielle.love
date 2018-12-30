@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import CardMedia from '@material-ui/core/CardMedia';
-import '../styles/components/PostImage.css';
+import './PostImage.css';
 
 const srcSize = (imageType, maxWidth, imageDetails) => {
   // Apparently GIFs are no longer animated after WP scales them so we always serve full size

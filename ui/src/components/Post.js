@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import PostMedia from './PostMedia';
 import PostContent from './PostContent';
-import '../styles/components/Post.css';
 
 class Post extends Component {
   componentDidMount() {
@@ -47,9 +46,6 @@ Post.propTypes = {
     }).isRequired,
     date: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }).isRequired,
-  tags: PropTypes.shape({
-    fetching: PropTypes.bool,
   }).isRequired,
   media: PropTypes.shape({
     fetching: PropTypes.bool,

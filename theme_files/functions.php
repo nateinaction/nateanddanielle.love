@@ -29,13 +29,29 @@ function lexi_enqueue_scripts() {
 		'lexiConfig',
 		array(
 			'endpoint' => esc_url_raw( rest_url() ),
-			'nonce'    => wp_create_nonce( 'wp_rest' ),
-			'title'    => get_bloginfo( 'name' ),
 			'menu'     => wp_json_encode( wp_get_nav_menu_items( get_nav_menu_locations()['primary'] ) ),
+			'nonce'    => wp_create_nonce( 'wp_rest' ),
+			'timeline' => lexi_get_timeline_meta(),
+			'title'    => get_bloginfo( 'name' ),
 		)
 	);
 }
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_scripts' );
+
+/**
+ * Get latest and oldest post dates
+ */
+function lexi_get_timeline_meta() {
+	global $wpdb;
+	return array(
+		'oldest' => $wpdb->get_row(
+			"SELECT post_date FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish' ORDER BY post_date ASC"
+		),
+		'latest' => $wpdb->get_row(
+			"SELECT post_date FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish' ORDER BY post_date DESC"
+		),
+	);
+}
 
 /**
  * Don't allow pinch-to-zoom on mobile

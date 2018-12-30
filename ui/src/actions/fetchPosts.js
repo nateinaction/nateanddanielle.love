@@ -3,7 +3,6 @@ import axios from 'axios';
 import setFetching from './setFetching';
 import setPosts from './setPosts';
 import fetchMedia from './fetchMedia';
-import fetchTags from './fetchTags';
 
 const fetchPosts = (timeDirection = 'before', date = new Date().toISOString()) => (
   (dispatch, getState) => {
@@ -32,7 +31,6 @@ const fetchPosts = (timeDirection = 'before', date = new Date().toISOString()) =
           );
         });
 
-        dispatch(fetchTags(content.tags));
         dispatch(fetchMedia(content.media));
 
         const timeline = {};
