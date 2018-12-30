@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import './LoadMore.css';
 
 const LoadMore = (props) => {
   const config = {
@@ -20,7 +21,7 @@ const LoadMore = (props) => {
       <Button
         color="primary"
         variant="contained"
-        className={`more ${props.timeDirection}`}
+        className={`load-more-${props.timeDirection}`}
         disabled={config.disabled}
         onClick={() => props.fetchPosts(props.timeDirection, props.timeline.earliestLoaded.date)}
       >

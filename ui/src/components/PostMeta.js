@@ -6,7 +6,7 @@ import moment from 'moment';
 const PostMeta = props => (
   <div className="post-meta">
     <Typography
-      type="caption"
+      variant="caption"
       component="p"
     >
       {moment(props.date).format('dddd, MMMM Do YYYY')}

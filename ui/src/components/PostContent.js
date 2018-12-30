@@ -7,18 +7,18 @@ import PostMeta from './PostMeta';
 const PostContent = props => (
   <CardContent>
     <Typography
-      type="headline"
+      gutterBottom
+      variant="h5"
       component="h2"
       dangerouslySetInnerHTML={{ __html: props.post.title.rendered }}
     />
     <Typography
+      variant="body2"
       component="p"
       dangerouslySetInnerHTML={{ __html: props.post.content.rendered }}
     />
     <PostMeta
       date={props.post.date}
-      tags={props.post.tags}
-      tagStore={props.tags}
     />
   </CardContent>
 );

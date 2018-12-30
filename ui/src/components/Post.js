@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import PostMedia from './PostMedia';
 import PostContent from './PostContent';
+import './Post.css';
 
 class Post extends Component {
   componentDidMount() {
@@ -24,7 +25,6 @@ class Post extends Component {
           />
           <PostContent
             post={this.props.post}
-            tags={this.props.tags}
           />
         </Card>
       </Grid>

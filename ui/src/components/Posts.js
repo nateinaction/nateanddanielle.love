@@ -41,7 +41,6 @@ class Posts extends Component {
                 key={post.id}
                 post={post}
                 media={this.props.media[post.featured_media]}
-                tags={this.props.tags}
                 openLightbox={this.props.openLightbox}
               />
             ))}
