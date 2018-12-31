@@ -1,15 +1,15 @@
-// Should I validate date here?
-
-const setFetchedPosts = (timeDirection, date) => {
-  if (timeDirection === 'earlier') {
+const setFetchedPosts = (timeDirection, date, posts) => {
+  if (timeDirection === 'later') {
     return {
-      type: 'SET_EARLIEST_POST_FETCHED',
+      type: 'SET_LATEST_POST_FETCHED',
       date,
+      posts,
     };
   }
   return {
-    type: 'SET_LATEST_POST_FETCHED',
+    type: 'SET_EARLIEST_POST_FETCHED',
     date,
+    posts,
   };
 };
 

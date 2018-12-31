@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 
 import posts from './posts';
 import media from './media';
-import timeline from './timeline';
 import lightbox from './lightbox';
 import fromLocal from './fromLocal';
+import fetchPostsStore from './fetchPostsStore';
 
 /*
 posts: {
@@ -29,9 +29,9 @@ media: {
 const reducers = combineReducers({
   posts,
   media,
-  timeline,
   lightbox,
   fromLocal,
+  fetchPostsStore,
 });
 
 export default reducers;

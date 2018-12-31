@@ -3,24 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Lightbox from 'react-images';
-
-import fetchTimeline from '../actions/fetchTimeline';
 import fetchPosts from '../actions/fetchPosts';
 import openLightbox from '../actions/openLightbox';
 import closeLightbox from '../actions/closeLightbox';
-
 import Post from './Post';
-import LoadMore from './LoadMore';
+import LoadMorePosts from './LoadMorePosts';
 
 class Posts extends Component {
   componentDidMount() {
-    this.props.fetchPosts();
-    this.props.fetchTimeline();
+    if (this.props.posts.length === 0) {
+      this.props.fetchPosts();
+    }
   }
 
   render() {
-    if (this.props.posts.posts.length === 0) {
+    if (this.props.posts.length === 0) {
       return (
         <Grid container direction="column" align="center" className="loading">
           <CircularProgress size={150} className="progress" />
@@ -29,14 +26,17 @@ class Posts extends Component {
     }
     return (
       <Grid container className="posts" direction="column" align="center">
-        <LoadMore
-          timeDirection="after"
-          timeline={this.props.timeline}
+        <LoadMorePosts
+          timeDirection="later"
+          latestPossible={this.props.fetchPostsStore.latestPossible}
+          earliestPossible={this.props.fetchPostsStore.earliestPossible}
+          latestFetched={this.props.fetchPostsStore.latestFetched}
+          earliestFetched={this.props.fetchPostsStore.earliestFetched}
           fetchPosts={this.props.fetchPosts}
         />
         <Grid item xs={12} sm={9} md={8} lg={6}>
           <Grid container>
-            {this.props.posts.posts.map(post => (
+            {this.props.posts.map(post => (
               <Post
                 key={post.id}
                 post={post}
@@ -46,17 +46,13 @@ class Posts extends Component {
             ))}
           </Grid>
         </Grid>
-        <LoadMore
-          timeDirection="before"
-          timeline={this.props.timeline}
+        <LoadMorePosts
+          timeDirection="earlier"
+          latestPossible={this.props.fetchPostsStore.latestPossible}
+          earliestPossible={this.props.fetchPostsStore.earliestPossible}
+          latestFetched={this.props.fetchPostsStore.latestFetched}
+          earliestFetched={this.props.fetchPostsStore.earliestFetched}
           fetchPosts={this.props.fetchPosts}
-        />
-        <Lightbox
-          images={this.props.lightbox.images}
-          isOpen={this.props.lightbox.isOpen}
-          onClose={() => this.props.closeLightbox()}
-          backdropClosesModal
-          showImageCount={false}
         />
       </Grid>
     );
@@ -64,20 +60,18 @@ class Posts extends Component {
 }
 Posts.propTypes = {
   media: PropTypes.objectOf(PropTypes.object).isRequired,
-  timeline: PropTypes.shape({
-    latest: PropTypes.shape({
+  fetchPostsStore: PropTypes.shape({
+    latestPossible: PropTypes.shape({
+      date: PropTypes.string,
+    }).isRequired,
+    earliestPossible: PropTypes.shape({
+      date: PropTypes.string,
+    }).isRequired,
+    latestFetched: PropTypes.shape({
       fetching: PropTypes.bool.isRequired,
       date: PropTypes.string,
     }).isRequired,
-    earliest: PropTypes.shape({
-      fetching: PropTypes.bool.isRequired,
-      date: PropTypes.string,
-    }).isRequired,
-    latestLoaded: PropTypes.shape({
-      fetching: PropTypes.bool.isRequired,
-      date: PropTypes.string,
-    }).isRequired,
-    earliestLoaded: PropTypes.shape({
+    earliestFetched: PropTypes.shape({
       fetching: PropTypes.bool.isRequired,
       date: PropTypes.string,
     }).isRequired,
@@ -86,26 +80,23 @@ Posts.propTypes = {
     images: PropTypes.arrayOf(PropTypes.object).isRequired,
     isOpen: PropTypes.bool.isRequired,
   }).isRequired,
-  posts: PropTypes.shape({
-    fetching: PropTypes.bool,
-    posts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
   closeLightbox: PropTypes.func.isRequired,
   openLightbox: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
-  fetchTimeline: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  timeline: state.timeline,
+  fetchPostsStore: state.fetchPostsStore,
   posts: state.posts,
   media: state.media,
   lightbox: state.lightbox,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchTimeline: () => dispatch(fetchTimeline()),
-  fetchPosts: (timeDirection, date) => dispatch(fetchPosts(timeDirection, date)),
+  fetchPosts: (timeDirection, earliestFetchedDate, latestFetchedDate) => dispatch(
+    fetchPosts(timeDirection, earliestFetchedDate, latestFetchedDate),
+  ),
   openLightbox: imagesArray => dispatch(openLightbox(imagesArray)),
   closeLightbox: () => dispatch(closeLightbox()),
 });

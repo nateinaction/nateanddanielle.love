@@ -1,11 +1,11 @@
 const setFetchingPosts = (timeDirection) => {
-  if (timeDirection === 'earlier') {
+  if (timeDirection === 'later') {
     return {
-      type: 'FETCHING_EARLIER_POSTS',
+      type: 'FETCHING_LATER_POSTS',
     };
   }
   return {
-    type: 'FETCHING_LATER_POSTS',
+    type: 'FETCHING_EARLIER_POSTS',
   };
 };
 
