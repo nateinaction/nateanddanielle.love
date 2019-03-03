@@ -43,10 +43,10 @@ composer_update_nothing:
 lint: lint_php lint_js
 
 lint_php:
-	$(DOCKER_RUN) $(WP_TEST_IMAGE) $(VENDOR_BIN_DIR)/phpcs .
+	$(DOCKER_RUN) --entrypoint="$(VENDOR_BIN_DIR)/phpcs" $(WP_TEST_IMAGE) .
 
 phpcbf:
-	$(DOCKER_RUN) $(WP_TEST_IMAGE) $(VENDOR_BIN_DIR)/phpcbf" .
+	$(DOCKER_RUN) --entrypoint="$(VENDOR_BIN_DIR)/phpcbf" $(WP_TEST_IMAGE) .
 
 lint_js:
 	$(DOCKER_RUN) $(NODE_IMAGE) npm run lint
@@ -66,5 +66,5 @@ build_zip: clean
 	rsync -r $(PHP_DIR)/ $(BUILD_DIR)/$(THEME_NAME)/
 	rsync -r vendor/acf/ $(BUILD_DIR)/$(THEME_NAME)/acf/
 	rsync -r $(JS_DIR)/$(BUILD_DIR)/static/ $(BUILD_DIR)/$(THEME_NAME)/static/
-	$(DOCKER_RUN) $(WP_TEST_IMAGE) bin/set_static_versions.sh
+	$(DOCKER_RUN) --entrypoint="bin/set_static_versions.sh" $(WP_TEST_IMAGE)
 	cd $(BUILD_DIR) && zip -r ../$(ARTIFACTS_DIR)/$(THEME_NAME)-$(shell make get_version).zip ./$(THEME_NAME)
