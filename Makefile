@@ -8,8 +8,8 @@ JS_DIR := ui
 
 # Shortcuts
 DOCKER_RUN := docker run --rm -v `pwd`:/workspace
-WP_TEST_IMAGE := nateinaction/wordpress-integration:php7.2
-COMPOSER_IMAGE := -v `pwd`:/app -v ~/.composer/cache:/tmp/cache composer
+WP_TEST_IMAGE := worldpeaceio/wordpress-integration:php7.2
+COMPOSER_IMAGE := -w /workspace -v ~/.composer/cache:/tmp/cache composer
 VENDOR_BIN_DIR := /workspace/vendor/bin
 NODE_IMAGE := -v ~/.npm:/root/.npm -w /workspace/ui/ node:11
 

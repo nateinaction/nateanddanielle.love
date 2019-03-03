@@ -28,11 +28,11 @@ function lexi_enqueue_scripts() {
 		'lexi_ui',
 		'dataOnPageLoad',
 		array(
-			'endpoint' => esc_url_raw( rest_url() ),
-			'menu'     => wp_get_nav_menu_items( get_nav_menu_locations()['primary'] ),
-			'nonce'    => wp_create_nonce( 'wp_rest' ),
+			'endpoint'        => esc_url_raw( rest_url() ),
+			'menu'            => wp_get_nav_menu_items( get_nav_menu_locations()['primary'] ),
+			'nonce'           => wp_create_nonce( 'wp_rest' ),
 			'fetchPostsStore' => lexi_fetch_posts_data(),
-			'title'    => get_bloginfo( 'name' ),
+			'title'           => get_bloginfo( 'name' ),
 		)
 	);
 }
@@ -42,14 +42,24 @@ add_action( 'wp_enqueue_scripts', 'lexi_enqueue_scripts' );
  * Get latest and oldest post dates
  */
 function lexi_fetch_posts_data() {
-	global $wpdb;
+	$post_args = array(
+		'post_type'      => 'post',
+		'posts_per_page' => 1,
+		'offset'         => 0,
+		'order_by'       => 'publish_date',
+	);
+
+	$post_args['order'] = 'ASC';
+	$post_array         = get_posts( $post_args );
+	$earliest_post_date = isset( $post_array[0] ) ? $post_array[0]->post_date : date( 'Y-m-d H:i:s' );
+
+	$post_args['order'] = 'DESC';
+	$post_array         = get_posts( $post_args );
+	$latest_post_date   = isset( $post_array[0] ) ? $post_array[0]->post_date : date( 'Y-m-d H:i:s' );
+
 	return array(
-		'earliestPossible' => $wpdb->get_var(
-			"SELECT post_date FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish' ORDER BY post_date ASC"
-		),
-		'latestPossible' => $wpdb->get_var(
-			"SELECT post_date FROM {$wpdb->posts} WHERE post_type = 'post' AND post_status = 'publish' ORDER BY post_date DESC"
-		),
+		'earliestPossible' => $earliest_post_date,
+		'latestPossible'   => $latest_post_date,
 	);
 }
 
