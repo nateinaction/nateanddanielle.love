@@ -11,21 +11,25 @@ DOCKER_RUN := docker run --rm -v `pwd`:/workspace
 WP_TEST_IMAGE := worldpeaceio/wordpress-integration:php7.2
 COMPOSER_IMAGE := -w /workspace -v ~/.composer/cache:/tmp/cache composer
 VENDOR_BIN_DIR := vendor/bin
-NODE_IMAGE := -v ~/.npm:/root/.npm -w /workspace/ui/ node:11
+NODE_IMAGE := -v ~/.npm:/root/.npm -w /workspace/$(JS_DIR) node:11
 
 # Commands
 all: setup lint build
 
 shell:
-	$(DOCKER_RUN) -it --entrypoint "/bin/bash" $(WP_TEST_IMAGE)
+	$(DOCKER_RUN) -it $(WP_TEST_IMAGE) /bin/bash
 
 shell_node:
-	$(DOCKER_RUN) -it --entrypoint "/bin/bash" $(NODE_IMAGE)
+	$(DOCKER_RUN) -it $(NODE_IMAGE) /bin/bash
 
-setup: composer_install npm_install
+setup: make_dirs composer_install npm_install
+
+make_dirs:
+	mkdir -p $(ARTIFACTS_DIR)
+	mkdir -p $(BUILD_DIR)/$(THEME_NAME)
 
 npm_install:
-	$(DOCKER_RUN) --entrypoint "npm" $(NODE_IMAGE) install
+	$(DOCKER_RUN) $(NODE_IMAGE) npm install
 
 composer_install:
 	$(DOCKER_RUN) $(COMPOSER_IMAGE) install
@@ -48,25 +52,19 @@ lint_js:
 	$(DOCKER_RUN) $(NODE_IMAGE) npm run lint
 
 clean:
-	rm -rf build
+	rm -rf build/*
 
 get_version:
 	@awk '/Version/{printf $$NF}' theme_files/style.css
 
 build: build_react_app build_zip
 
-move_acf_vendor_to_build:
-	mkdir -p $(BUILD_DIR)/$(THEME_NAME)
-	rsync -r vendor/acf/ $(BUILD_DIR)/$(THEME_NAME)/acf/
-
 build_react_app:
-	$(DOCKER_RUN) --entrypoint "npm" $(NODE_IMAGE) build
+	$(DOCKER_RUN) $(NODE_IMAGE) npm run build
 
-build_zip: clean move_acf_vendor_to_build
-	mkdir -p $(ARTIFACTS_DIR)
-	mkdir -p $(BUILD_DIR)/$(THEME_NAME)
+build_zip: clean
 	rsync -r $(PHP_DIR)/ $(BUILD_DIR)/$(THEME_NAME)/
-	cp $(shell find ui/build/static/js -name '*.js') $(BUILD_DIR)/$(THEME_NAME)/ui.js
-	# Contcatenating style.css with minified react app style
-	cat $(shell find ui/build/static/css -name '*.css') >> $(BUILD_DIR)/$(THEME_NAME)/style.css
+	rsync -r vendor/acf/ $(BUILD_DIR)/$(THEME_NAME)/acf/
+	rsync -r $(JS_DIR)/$(BUILD_DIR)/static/ $(BUILD_DIR)/$(THEME_NAME)/static/
+	$(DOCKER_RUN) $(WP_TEST_IMAGE) bin/set_static_versions.sh
 	cd $(BUILD_DIR) && zip -r ../$(ARTIFACTS_DIR)/$(THEME_NAME)-$(shell make get_version).zip ./$(THEME_NAME)

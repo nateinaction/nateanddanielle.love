@@ -14,8 +14,8 @@ require_once get_stylesheet_directory() . '/acf/acf.php';
  * Enqueue styles
  */
 function lexi_enqueue_styles() {
-	wp_enqueue_style( 'lexi_font', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500', false, '0.10.0' );
-	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . '/style.css', false, '0.10.0' );
+	wp_enqueue_style( 'lexi_font', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500', false, 'lexi_version' );
+	wp_enqueue_style( 'lexi_css', get_template_directory_uri() . 'lexi_main_css', false, 'lexi_version' );
 }
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_styles' );
 
@@ -23,9 +23,10 @@ add_action( 'wp_enqueue_scripts', 'lexi_enqueue_styles' );
  * Enqueue scripts
  */
 function lexi_enqueue_scripts() {
-	wp_enqueue_script( 'lexi_ui', get_template_directory_uri() . '/ui.js', false, '0.9.13', true );
+	wp_enqueue_script( 'lexi_non_main', get_template_directory_uri() . 'lexi_non_main_js', false, 'lexi_version', true );
+	wp_enqueue_script( 'lexi_main', get_template_directory_uri() . 'lexi_main_js', false, 'lexi_version', true );
 	wp_localize_script(
-		'lexi_ui',
+		'lexi_main',
 		'dataOnPageLoad',
 		array(
 			'endpoint'        => esc_url_raw( rest_url() ),
