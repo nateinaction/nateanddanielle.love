@@ -21,7 +21,6 @@ class Post extends Component {
             media={this.props.media}
             post={this.props.post}
             width={this.width}
-            openLightbox={this.props.openLightbox}
           />
           <PostContent
             post={this.props.post}
@@ -53,7 +52,6 @@ Post.propTypes = {
     media_details: PropTypes.object,
     mime_type: PropTypes.string,
   }).isRequired,
-  openLightbox: PropTypes.func.isRequired,
 };
 
 export default Post;

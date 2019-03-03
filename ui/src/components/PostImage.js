@@ -46,13 +46,13 @@ const PostImage = (props) => {
   };
   const image = srcSize(media.type, media.maxWidth, media.details);
   return (
-    <button type="button" onClick={() => props.openLightbox([image])}>
+    <div>
       <CardMedia
         title={props.media.alt_text}
         src={image.featured}
         component="img"
       />
-    </button>
+    </div>
   );
 };
 
@@ -64,7 +64,6 @@ PostImage.propTypes = {
     mime_type: PropTypes.string,
   }).isRequired,
   width: PropTypes.number,
-  openLightbox: PropTypes.func.isRequired,
 };
 
 PostImage.defaultProps = {

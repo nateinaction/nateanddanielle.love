@@ -1,3 +1,5 @@
+/* eslint-disable react/no-danger */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import PostImage from './PostImage';
@@ -17,7 +19,6 @@ const PostMedia = (props) => {
     <PostImage
       media={props.media}
       width={props.width}
-      openLightbox={props.openLightbox}
     />
   );
 };
@@ -36,7 +37,6 @@ PostMedia.propTypes = {
     }),
   }).isRequired,
   width: PropTypes.number,
-  openLightbox: PropTypes.func.isRequired,
 };
 
 PostMedia.defaultProps = {

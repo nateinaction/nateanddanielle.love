@@ -10,7 +10,7 @@ JS_DIR := ui
 DOCKER_RUN := docker run --rm -v `pwd`:/workspace
 WP_TEST_IMAGE := worldpeaceio/wordpress-integration:php7.2
 COMPOSER_IMAGE := -w /workspace -v ~/.composer/cache:/tmp/cache composer
-VENDOR_BIN_DIR := /workspace/vendor/bin
+VENDOR_BIN_DIR := vendor/bin
 NODE_IMAGE := -v ~/.npm:/root/.npm -w /workspace/ui/ node:11
 
 # Commands
@@ -39,13 +39,13 @@ composer_update_nothing:
 lint: lint_php lint_js
 
 lint_php:
-	$(DOCKER_RUN) --entrypoint "$(VENDOR_BIN_DIR)/phpcs" $(WP_TEST_IMAGE) .
+	$(DOCKER_RUN) $(WP_TEST_IMAGE) $(VENDOR_BIN_DIR)/phpcs .
 
 phpcbf:
-	$(DOCKER_RUN) --entrypoint "$(VENDOR_BIN_DIR)/phpcbf" $(WP_TEST_IMAGE) .
+	$(DOCKER_RUN) $(WP_TEST_IMAGE) $(VENDOR_BIN_DIR)/phpcbf" .
 
 lint_js:
-	$(DOCKER_RUN) --entrypoint "npm" $(NODE_IMAGE) run lint
+	$(DOCKER_RUN) $(NODE_IMAGE) npm run lint
 
 clean:
 	rm -rf build
@@ -69,4 +69,4 @@ build_zip: clean move_acf_vendor_to_build
 	cp $(shell find ui/build/static/js -name '*.js') $(BUILD_DIR)/$(THEME_NAME)/ui.js
 	# Contcatenating style.css with minified react app style
 	cat $(shell find ui/build/static/css -name '*.css') >> $(BUILD_DIR)/$(THEME_NAME)/style.css
-	cd $(BUILD_DIR) && zip -r ../$(ARTIFACTS_DIR)/$(THEME_NAME)-$(shell make get_version).zip ./$(THEME_NAME) && cd -
+	cd $(BUILD_DIR) && zip -r ../$(ARTIFACTS_DIR)/$(THEME_NAME)-$(shell make get_version).zip ./$(THEME_NAME)

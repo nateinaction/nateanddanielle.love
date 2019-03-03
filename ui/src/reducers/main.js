@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 
 import posts from './posts';
 import media from './media';
-import lightbox from './lightbox';
 import fromLocal from './fromLocal';
 import fetchPostsStore from './fetchPostsStore';
 
@@ -29,7 +28,6 @@ media: {
 const reducers = combineReducers({
   posts,
   media,
-  lightbox,
   fromLocal,
   fetchPostsStore,
 });
