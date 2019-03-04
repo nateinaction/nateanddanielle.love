@@ -24,7 +24,7 @@ add_action( 'wp_enqueue_scripts', 'lexi_enqueue_styles' );
  */
 function lexi_enqueue_scripts() {
 	wp_enqueue_script( 'lexi_non_main', get_template_directory_uri() . 'lexi_non_main_js', false, 'lexi_version', false );
-	wp_enqueue_script( 'lexi_main', get_template_directory_uri() . 'lexi_main_js', array('lexi_non_main'), 'lexi_version', false );
+	wp_enqueue_script( 'lexi_main', get_template_directory_uri() . 'lexi_main_js', array( 'lexi_non_main' ), 'lexi_version', false );
 	wp_localize_script(
 		'lexi_main',
 		'dataOnPageLoad',
