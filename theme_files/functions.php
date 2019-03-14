@@ -20,6 +20,23 @@ function lexi_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_styles' );
 
 /**
+ * Data on pageload
+ *
+ * This is the array of data provided to the react app on pageload
+ */
+function lexi_data_on_pageload() {
+	$nav_menu_locations = get_nav_menu_locations();
+	$nav_menu_items     = isset( $nav_menu_locations['primary'] ) ? wp_get_nav_menu_items( $nav_menu_locations['primary'] ) : [];
+	return array(
+		'endpoint'        => esc_url_raw( rest_url() ),
+		'menu'            => $nav_menu_items,
+		'nonce'           => wp_create_nonce( 'wp_rest' ),
+		'fetchPostsStore' => lexi_fetch_posts_data(),
+		'title'           => get_bloginfo( 'name' ),
+	);
+}
+
+/**
  * Enqueue scripts
  */
 function lexi_enqueue_scripts() {
@@ -28,13 +45,7 @@ function lexi_enqueue_scripts() {
 	wp_localize_script(
 		'lexi_main',
 		'dataOnPageLoad',
-		array(
-			'endpoint'        => esc_url_raw( rest_url() ),
-			'menu'            => wp_get_nav_menu_items( get_nav_menu_locations()['primary'] ),
-			'nonce'           => wp_create_nonce( 'wp_rest' ),
-			'fetchPostsStore' => lexi_fetch_posts_data(),
-			'title'           => get_bloginfo( 'name' ),
-		)
+		lexi_data_on_pageload()
 	);
 }
 add_action( 'wp_enqueue_scripts', 'lexi_enqueue_scripts' );

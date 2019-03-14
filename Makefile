@@ -14,7 +14,7 @@ VENDOR_BIN_DIR := vendor/bin
 NODE_IMAGE := -v ~/.npm:/root/.npm -w /workspace/$(JS_DIR) node:11
 
 # Commands
-all: setup lint build
+all: setup lint build test_php
 
 shell:
 	$(DOCKER_RUN) -it $(WP_TEST_IMAGE) /bin/bash
@@ -57,6 +57,11 @@ clean:
 get_version:
 	@awk '/Version/{printf $$NF}' theme_files/style.css
 
+test: build_zip test_php
+
+test_php:
+	$(DOCKER_RUN) -v `pwd`/$(BUILD_DIR)/$(THEME_NAME)/:/wordpress/tests/phpunit/data/themedir1/default/ $(WP_TEST_IMAGE) "vendor/bin/phpunit --testsuite integration"
+
 build: build_react_app build_zip
 
 build_react_app:
@@ -64,7 +69,7 @@ build_react_app:
 
 build_zip: clean
 	rsync -r $(PHP_DIR)/ $(BUILD_DIR)/$(THEME_NAME)/
-	rsync -r vendor/acf/ $(BUILD_DIR)/$(THEME_NAME)/acf/
+	rsync -r vendor/acf/acf/ $(BUILD_DIR)/$(THEME_NAME)/acf/
 	rsync -r $(JS_DIR)/$(BUILD_DIR)/static/ $(BUILD_DIR)/$(THEME_NAME)/static/
 	$(DOCKER_RUN) --entrypoint="bin/set_static_versions.sh" $(WP_TEST_IMAGE)
 	cd $(BUILD_DIR) && zip -r ../$(ARTIFACTS_DIR)/$(THEME_NAME)-$(shell make get_version).zip ./$(THEME_NAME)

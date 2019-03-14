@@ -1,0 +1,21 @@
+{
+    "endpoint": "https://nateanddanielle.love/wp-json/",
+    "menu": [
+        {
+            "ID": 4,
+            "title": "Home",
+            "url": "http://localhost:3000"
+        },
+        {
+            "ID": 5,
+            "title": "About Me",
+            "url": "https://nategay.me"
+        }
+    ],
+    "nonce": "083b2c536c",
+    "title": "Local Development Site",
+    "fetchPostsStore": {
+        "earliestPossible": "2013-09-15 15:37:25",
+        "latestPossible": "2018-12-15 20:02:17"
+    }
+}

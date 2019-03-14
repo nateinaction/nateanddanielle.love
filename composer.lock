@@ -4,10 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6394fa51aef03606473ff8979b817f7d",
+    "content-hash": "7582f228c4a06cafd6c1d66141150d00",
     "packages": [
         {
-            "name": "acf",
+            "name": "acf/acf",
             "version": "5.7.12",
             "dist": {
                 "type": "zip",

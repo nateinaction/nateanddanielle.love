@@ -11,33 +11,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <title>Lexi Theme Local</title>
     <!--
-      This mocks the data provided on page load by WordPress via wp_localize_script.
+      This pulls in contract data provided on page load by WordPress via wp_localize_script.
     -->
     <script type="text/javascript">
-      window.dataOnPageLoad = {
-        endpoint: "https://nateanddanielle.love/wp-json/",
-        menu: {
-          items: [
-            {
-              ID: 12,
-              title: "Home",
-              url: "http://localhost:3000",
-            },
-            {
-              ID: 345,
-              title: "About Me",
-              url: "https://nategay.me",
-            }
-          ],
-          open: false
-        },
-        nonce: "083b2c536c",
-        title: "Local Development Site",
-        fetchPostsStore: {
-          earliestPossible: '2013-09-15T15:37:25',
-          latestPossible: '2018-12-15T20:02:17',
-        },
-      };
+      const Http = new XMLHttpRequest();
+      const url='%PUBLIC_URL%/data-on-page-load.json';
+      Http.open("GET", url);
+      Http.send();
+      Http.onload = (e) => {
+        window.dataOnPageLoad = JSON.parse(Http.responseText);
+      }
     </script>
   </head>
   <body>
