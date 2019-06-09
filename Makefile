@@ -31,6 +31,9 @@ make_dirs:
 npm_install:
 	$(DOCKER_RUN) $(NODE_IMAGE) npm install
 
+npm_update:
+	$(DOCKER_RUN) $(NODE_IMAGE) npm update
+
 composer_install:
 	$(DOCKER_RUN) $(COMPOSER_IMAGE) install
 

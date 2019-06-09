@@ -9,7 +9,7 @@ const Menu = props => (
   <div className="menu">
     <AppBar position="static" style={{ backgroundColor: 'white' }}>
       <Toolbar>
-        <Typography variant="h6" color="default" className="flex">
+        <Typography variant="h6" color="textPrimary" className="flex">
           {props.title}
         </Typography>
       </Toolbar>
