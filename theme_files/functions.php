@@ -2,7 +2,8 @@
 /**
  * This index file is loaded on every page request.
  *
- * @package nateinaction/lexi-theme
+ * @package nateinaction
+ * @subpackage lexi-theme
  */
 
 // Prevent direct access.
@@ -76,12 +77,12 @@ function lexi_fetch_posts_data() {
 }
 
 /**
- * Don't allow pinch-to-zoom on mobile
+ * Add some additional items to the header
  */
-function viewport_meta() {
-	echo '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">';
+function additional_header_items() {
+	echo '<link rel="shortcut icon" href="' . get_template_directory_uri() . '/favicon.ico">';
 }
-add_action( 'wp_head', 'viewport_meta' );
+add_action( 'wp_head', 'additional_header_items' );
 
 /**
  * Register primary menu

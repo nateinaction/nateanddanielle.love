@@ -5,11 +5,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { blue, deepOrange, red } from '@material-ui/core/colors';
+import * as serviceWorker from './serviceWorker';
 import store from './store';
 import Menu from './components/Menu';
 import Posts from './components/Posts';
 
-// import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const theme = createMuiTheme({
@@ -40,4 +40,8 @@ render(
   </Provider>,
   document.getElementById('root'),
 );
-// registerServiceWorker();
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.register();
