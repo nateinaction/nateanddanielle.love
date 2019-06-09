@@ -4,7 +4,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { blue, deepOrange, red } from '@material-ui/core/colors';
+import { blue, deepOrange } from '@material-ui/core/colors';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
 import Menu from './components/Menu';
@@ -13,11 +13,11 @@ import Posts from './components/Posts';
 import './index.css';
 
 const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
   palette: {
-    primary: red,
+    primary: {
+      ...blue,
+      A500: '#3c99f8',
+    },
     accent: {
       ...blue,
       A200: '#90CAF9',
