@@ -41,8 +41,8 @@ function lexi_data_on_pageload() {
  * Enqueue scripts
  */
 function lexi_enqueue_scripts() {
-	wp_enqueue_script( 'lexi_non_main', get_template_directory_uri() . 'lexi_non_main_js', false, 'lexi_version', false );
-	wp_enqueue_script( 'lexi_main', get_template_directory_uri() . 'lexi_main_js', array( 'lexi_non_main' ), 'lexi_version', false );
+	wp_enqueue_script( 'lexi_non_main', get_template_directory_uri() . 'lexi_non_main_js', false, 'lexi_version', true );
+	wp_enqueue_script( 'lexi_main', get_template_directory_uri() . 'lexi_main_js', array( 'lexi_non_main' ), 'lexi_version', true );
 	wp_localize_script(
 		'lexi_main',
 		'dataOnPageLoad',
