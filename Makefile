@@ -7,11 +7,11 @@ PHP_DIR := theme_files
 JS_DIR := ui
 
 # Shortcuts
-DOCKER_RUN := docker run --rm -v `pwd`:/workspace
+DOCKER_RUN := docker run --rm -v `pwd`:/workspace:delegated
 WP_TEST_IMAGE := worldpeaceio/wordpress-integration:php7.2
-COMPOSER_IMAGE := -w /workspace -v ~/.composer/cache:/tmp/cache composer
+COMPOSER_IMAGE := -w /workspace -v ~/.composer/cache:/tmp/cache:delegated composer
 VENDOR_BIN_DIR := vendor/bin
-NODE_IMAGE := -v ~/.npm:/root/.npm -w /workspace/$(JS_DIR) node:11
+NODE_IMAGE := -v ~/.npm:/root/.npm:delegated -w /workspace/$(JS_DIR) node:11
 
 # Commands
 all: setup lint build test_php
