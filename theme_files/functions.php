@@ -143,7 +143,7 @@ function lexi_acf_setup() {
 					'label'        => 'Link to embed',
 					'name'         => 'link_to_embed',
 					'type'         => 'url',
-					'instructions' => 'This should work for all possible embeds: https://codex.wordpress.org/Embeds',
+					'instructions' => 'This should work for all possible embeds: https://wordpress.org/support/article/embeds/',
 					'placeholder'  => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
 				),
 			),
@@ -183,7 +183,12 @@ function lexi_add_embed() {
 				);
 				$response['embed'] = ! empty( $response['embed_url'] );
 				if ( $response['embed'] ) {
-					$response['embed_code'] = wp_oembed_get( $response['embed_url'] );
+					$cloudflare_stream_html = lexi_is_cloudflare_stream( $response['embed_url'] );
+					if ($cloudflare_stream_html) {
+						$response['embed_code'] = $cloudflare_stream_html;
+					} else {
+						$response['embed_code'] = wp_oembed_get( $response['embed_url'] );
+					}
 				}
 				return (array) $response;
 			},
@@ -195,3 +200,14 @@ function lexi_add_embed() {
 	);
 };
 add_action( 'rest_api_init', 'lexi_add_embed' );
+
+/**
+ * Allow Cloudflare Stream embed
+ */
+function lexi_is_cloudflare_stream( $url ) {
+	$pattern = '|^https://watch.cloudflarestream.com/([a-z0-9]+)|';
+	if ( preg_match( $pattern, $url, $match ) ) {
+		return "<iframe src='https://iframe.videodelivery.net/{$match[1]}' style='border: none;' height='720' width='1280' allow='accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;' allowfullscreen='true'></iframe>";
+	}
+	return false;
+}
