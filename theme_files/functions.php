@@ -207,7 +207,7 @@ add_action( 'rest_api_init', 'lexi_add_embed' );
 function lexi_is_cloudflare_stream( $url ) {
 	$pattern = '|^https://watch.cloudflarestream.com/([a-z0-9]+)|';
 	if ( preg_match( $pattern, $url, $match ) ) {
-		return "<iframe src='https://iframe.videodelivery.net/{$match[1]}' style='border: none;' height='720' width='1280' allow='accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;' allowfullscreen='true'></iframe>";
+		return "<iframe src='https://iframe.videodelivery.net/{$match[1]}?muted=true&loop=true&autoplay=true' style='border: none;' height='720' width='1280' allow='accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;' allowfullscreen='true'></iframe>";
 	}
 	return false;
 }
